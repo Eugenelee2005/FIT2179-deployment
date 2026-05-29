@@ -1,0 +1,294 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 820,
+  "height": 500,
+  "background": "#ffffff",
+  "title": {
+    "text": "International visitor flows into Australia",
+    "subtitle": "Top named origin markets by trips, year ending December 2025",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "projection": {
+    "type": "equalEarth",
+    "rotate": [-150, 0, 0],
+    "scale": 190,
+    "translate": [410, 255]
+  },
+  "layer": [
+    {
+      "data": {
+        "graticule": {
+          "step": [30, 30]
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#dfe8ee",
+        "strokeWidth": 0.5,
+        "fill": null
+      }
+    },
+    {
+      "data": {
+        "url": "data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#edf3f6",
+        "stroke": "#b9c7d2",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "data/flow_paths.csv"
+      },
+      "mark": {
+        "type": "line",
+        "opacity": 0.78,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "route_id",
+          "type": "nominal"
+        },
+        "order": {
+          "field": "step",
+          "type": "ordinal"
+        },
+        "color": {
+          "field": "region",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Asia", "Europe", "North America", "Oceania"],
+            "range": ["#0f6f8f", "#7c3aed", "#c2410c", "#0f8a5f"]
+          },
+          "legend": {
+            "title": "Origin region"
+          }
+        },
+        "strokeWidth": {
+          "field": "trips_2025",
+          "type": "quantitative",
+          "scale": {
+            "domain": [170, 1305],
+            "range": [1, 8]
+          },
+          "legend": {
+            "title": "Trips ('000)"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Origin"
+          },
+          {
+            "field": "trips_2025",
+            "type": "quantitative",
+            "title": "Trips 2025 ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "spend_2025",
+            "type": "quantitative",
+            "title": "Spend in Australia ($M)",
+            "format": ",.0f"
+          },
+          {
+            "field": "change_pct",
+            "type": "quantitative",
+            "title": "Trips change vs 2024",
+            "format": "+.1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/origin_flows.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "stroke": "#ffffff",
+        "strokeWidth": 1,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "trips_2025",
+          "type": "quantitative",
+          "scale": {
+            "domain": [170, 1305],
+            "range": [45, 550]
+          },
+          "legend": null
+        },
+        "color": {
+          "field": "region",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Asia", "Europe", "North America", "Oceania"],
+            "range": ["#0f6f8f", "#7c3aed", "#c2410c", "#0f8a5f"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Origin"
+          },
+          {
+            "field": "trips_2025",
+            "type": "quantitative",
+            "title": "Trips 2025 ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "nights_2025",
+            "type": "quantitative",
+            "title": "Nights 2025 ('000)",
+            "format": ",.0f"
+          },
+          {
+            "field": "spend_2025",
+            "type": "quantitative",
+            "title": "Spend in Australia ($M)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/origin_flows.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.rank <= 8"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 7,
+        "font": "Arial",
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#17212b"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "country",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/destination.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "size": 170,
+        "color": "#17212b",
+        "stroke": "#ffffff",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "place",
+            "type": "nominal"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/destination.csv"
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 9,
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#17212b"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "place",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "right",
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

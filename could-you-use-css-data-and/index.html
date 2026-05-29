@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Visitor Flow Map</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">International Visitor Survey, year ending December 2025</p>
+      <h1>Where Australia's international visitors come from</h1>
+      <p class="lede">The flow map shows the largest named origin markets by trips to Australia. Line width and origin point size represent estimated trips in 2025.</p>
+    </header>
+
+    <section class="visual-section">
+      <div class="story">
+        <h2>Top origin markets</h2>
+        <p>New Zealand remains the largest market by trips, while China is the second largest by trips and the largest by spend in Australia.</p>
+        <p class="note">Routes use representative country coordinates and are not flight paths.</p>
+      </div>
+      <div id="flow_map" class="vis"></div>
+    </section>
+
+    <footer>
+      <p>Source: Tourism Research Australia, International Visitor Survey. Estimates are for international visitors aged 15 years and over.</p>
+    </footer>
+  </main>
+
+  <script src="js/vega_lite_vis.js"></script>
+</body>
+</html>
