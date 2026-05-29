@@ -1,0 +1,486 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+    "resize": true
+  },
+  "background": "#ffffff",
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2025,
+      "bind": {
+        "input": "radio",
+        "options": [2024, 2025],
+        "name": "Year: "
+      }
+    },
+    {
+      "name": "selectedMetric",
+      "value": "Expenditure ($M)",
+      "bind": {
+        "input": "radio",
+        "options": ["Expenditure ($M)", "Tourists / trips ('000)"],
+        "name": "Map value: "
+      }
+    }
+  ],
+  "vconcat": [
+    {
+      "title": {
+        "text": "International visitor activity by Australian state and territory",
+        "subtitle": "Colour changes with the selected year and measure",
+        "anchor": "start",
+        "font": "Arial",
+        "fontSize": 20,
+        "subtitleFontSize": 12,
+        "subtitleColor": "#5c6876",
+        "offset": 12
+      },
+      "width": 820,
+      "height": 500,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "data/australia_states.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "STE11aAust"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.properties.STATE_NAME",
+              "as": "state_name"
+            },
+            {
+              "calculate": "'Data is not available for ' + datum.state_name",
+              "as": "note"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#edf2f6",
+            "stroke": "#ffffff",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "tooltip": {
+              "field": "note",
+              "type": "nominal"
+            }
+          }
+        },
+        {
+          "data": {
+            "url": "data/australia_states.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "STE11aAust"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.properties.STATE_NAME",
+              "as": "state_name"
+            },
+            {
+              "lookup": "state_name",
+              "from": {
+                "data": {
+                  "url": "data/state_expenditure.csv",
+                  "format": {
+                    "type": "csv",
+                    "parse": {
+                      "trips_2024": "number",
+                      "trips_2025": "number",
+                      "nights_2024": "number",
+                      "nights_2025": "number",
+                      "expenditure_2024_m": "number",
+                      "expenditure_2025_m": "number",
+                      "exp_change_pct": "number"
+                    }
+                  }
+                },
+                "key": "state",
+                "fields": [
+                  "trips_2024",
+                  "trips_2025",
+                  "nights_2024",
+                  "nights_2025",
+                  "expenditure_2024_m",
+                  "expenditure_2025_m",
+                  "exp_change_pct"
+                ]
+              }
+            },
+            {
+              "filter": "isValid(datum.expenditure_2025_m)"
+            },
+            {
+              "calculate": "selectedYear == 2024 ? datum.expenditure_2024_m : datum.expenditure_2025_m",
+              "as": "selected_expenditure_m"
+            },
+            {
+              "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
+              "as": "selected_trips"
+            },
+            {
+              "calculate": "selectedYear == 2024 ? datum.nights_2024 : datum.nights_2025",
+              "as": "selected_nights"
+            },
+            {
+              "calculate": "datum.selected_expenditure_m / datum.selected_trips * 1000",
+              "as": "avg_spend_per_trip"
+            },
+            {
+              "calculate": "selectedMetric == 'Expenditure ($M)' ? datum.selected_expenditure_m : datum.selected_trips",
+              "as": "selected_value"
+            }
+          ],
+          "params": [
+            {
+              "name": "stateSelection",
+              "select": {
+                "type": "point",
+                "fields": ["state_name"],
+                "on": "click",
+                "clear": "dblclick"
+              }
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#ffffff",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "color": {
+              "field": "selected_value",
+              "type": "quantitative",
+              "title": "Selected map value",
+              "scale": {
+                "scheme": "tealblues"
+              },
+              "legend": {
+                "orient": "right",
+                "format": ",.0f"
+              }
+            },
+            "stroke": {
+              "condition": {
+                "param": "stateSelection",
+                "empty": false,
+                "value": "#111827"
+              },
+              "value": "#ffffff"
+            },
+            "strokeWidth": {
+              "condition": {
+                "param": "stateSelection",
+                "empty": false,
+                "value": 3
+              },
+              "value": 1
+            },
+            "opacity": {
+              "condition": {
+                "param": "stateSelection",
+                "value": 1
+              },
+              "value": 0.7
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State/Territory"
+              },
+              {
+                "expr": "selectedYear",
+                "type": "quantitative",
+                "title": "Selected year"
+              },
+              {
+                "field": "expenditure_2024_m",
+                "type": "quantitative",
+                "title": "2024 expenditure ($M)",
+                "format": "$,.0f"
+              },
+              {
+                "field": "expenditure_2025_m",
+                "type": "quantitative",
+                "title": "2025 expenditure ($M)",
+                "format": "$,.0f"
+              },
+              {
+                "field": "exp_change_pct",
+                "type": "quantitative",
+                "title": "% change in expenditure",
+                "format": "+.1f"
+              },
+              {
+                "field": "selected_trips",
+                "type": "quantitative",
+                "title": "International visitor trips ('000)",
+                "format": ",.1f"
+              },
+              {
+                "field": "selected_nights",
+                "type": "quantitative",
+                "title": "Visitor nights ('000)",
+                "format": ",.0f"
+              },
+              {
+                "field": "avg_spend_per_trip",
+                "type": "quantitative",
+                "title": "Average spend per trip",
+                "format": "$,.0f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "hconcat": [
+        {
+          "title": {
+            "text": "Selected State/Territory",
+            "anchor": "start",
+            "font": "Arial",
+            "fontSize": 14
+          },
+          "width": 280,
+          "height": 220,
+          "projection": {
+            "type": "mercator"
+          },
+          "data": {
+            "url": "data/australia_states.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "STE11aAust"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.properties.STATE_NAME",
+              "as": "state_name"
+            },
+            {
+              "lookup": "state_name",
+              "from": {
+                "data": {
+                  "url": "data/state_expenditure.csv",
+                  "format": {
+                    "type": "csv",
+                    "parse": {
+                      "trips_2024": "number",
+                      "trips_2025": "number",
+                      "nights_2024": "number",
+                      "nights_2025": "number",
+                      "expenditure_2024_m": "number",
+                      "expenditure_2025_m": "number",
+                      "exp_change_pct": "number"
+                    }
+                  }
+                },
+                "key": "state",
+                "fields": [
+                  "trips_2024",
+                  "trips_2025",
+                  "nights_2024",
+                  "nights_2025",
+                  "expenditure_2024_m",
+                  "expenditure_2025_m",
+                  "exp_change_pct"
+                ]
+              }
+            },
+            {
+              "filter": {
+                "param": "stateSelection",
+                "empty": false
+              }
+            },
+            {
+              "calculate": "selectedYear == 2024 ? datum.expenditure_2024_m : datum.expenditure_2025_m",
+              "as": "selected_expenditure_m"
+            },
+            {
+              "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
+              "as": "selected_trips"
+            },
+            {
+              "calculate": "selectedMetric == 'Expenditure ($M)' ? datum.selected_expenditure_m : datum.selected_trips",
+              "as": "selected_value"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#111827",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "color": {
+              "field": "selected_value",
+              "type": "quantitative",
+              "scale": {
+                "scheme": "tealblues"
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State/Territory"
+              },
+              {
+                "field": "selected_expenditure_m",
+                "type": "quantitative",
+                "title": "Selected expenditure ($M)",
+                "format": "$,.0f"
+              },
+              {
+                "field": "selected_trips",
+                "type": "quantitative",
+                "title": "Selected visitor trips ('000)",
+                "format": ",.1f"
+              }
+            ]
+          }
+        },
+        {
+          "title": {
+            "text": "Selected Value",
+            "anchor": "start",
+            "font": "Arial",
+            "fontSize": 14
+          },
+          "width": 480,
+          "height": 120,
+          "data": {
+            "url": "data/australia_states.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "STE11aAust"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.properties.STATE_NAME",
+              "as": "state_name"
+            },
+            {
+              "lookup": "state_name",
+              "from": {
+                "data": {
+                  "url": "data/state_expenditure.csv",
+                  "format": {
+                    "type": "csv",
+                    "parse": {
+                      "trips_2024": "number",
+                      "trips_2025": "number",
+                      "expenditure_2024_m": "number",
+                      "expenditure_2025_m": "number"
+                    }
+                  }
+                },
+                "key": "state",
+                "fields": [
+                  "trips_2024",
+                  "trips_2025",
+                  "expenditure_2024_m",
+                  "expenditure_2025_m"
+                ]
+              }
+            },
+            {
+              "filter": {
+                "param": "stateSelection",
+                "empty": false
+              }
+            },
+            {
+              "calculate": "selectedYear == 2024 ? datum.expenditure_2024_m : datum.expenditure_2025_m",
+              "as": "selected_expenditure_m"
+            },
+            {
+              "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
+              "as": "selected_trips"
+            },
+            {
+              "calculate": "selectedMetric == 'Expenditure ($M)' ? datum.selected_expenditure_m : datum.selected_trips",
+              "as": "selected_value"
+            },
+            {
+              "calculate": "selectedMetric == 'Expenditure ($M)' ? 'Expenditure ($M)' : \"Tourists / trips ('000)\"",
+              "as": "metric_label"
+            }
+          ],
+          "mark": {
+            "type": "bar",
+            "cornerRadiusEnd": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "selected_value",
+              "type": "quantitative",
+              "title": null,
+              "axis": {
+                "format": ",.0f"
+              }
+            },
+            "y": {
+              "field": "state_name",
+              "type": "nominal",
+              "title": null
+            },
+            "color": {
+              "value": "#0f766e"
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State/Territory"
+              },
+              {
+                "field": "metric_label",
+                "type": "nominal",
+                "title": "Metric"
+              },
+              {
+                "field": "selected_value",
+                "type": "quantitative",
+                "title": "Value",
+                "format": ",.1f"
+              }
+            ]
+          }
+        }
+      ],
+      "spacing": 40
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gradientLength": 220
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}
