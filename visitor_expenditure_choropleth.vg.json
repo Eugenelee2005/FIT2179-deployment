@@ -160,12 +160,12 @@
             "color": {
               "field": "selected_value",
               "type": "quantitative",
-              "title": "Selected map value",
+              "title": "Change in expenditure (%)",
               "scale": {
                 "scheme": "tealblues"
               },
               "legend": {
-                "title": "Selected map value",
+                "title": "Change in expenditure (%)",
                 "orient": "right",
                 "format": ",.0f"
               }
