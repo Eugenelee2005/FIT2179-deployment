@@ -258,6 +258,38 @@
               }
             ]
           }
+        },
+        {
+          "data": {
+            "values": [
+              {"state": "New South Wales",       "lon": 146.5, "lat": -32.8},
+              {"state": "Victoria",              "lon": 144.5, "lat": -36.9},
+              {"state": "Queensland",            "lon": 143.5, "lat": -22.5},
+              {"state": "South Australia",       "lon": 135.5, "lat": -30.8},
+              {"state": "Western Australia",     "lon": 121.0, "lat": -25.5},
+              {"state": "Tasmania",              "lon": 147.0, "lat": -41.8},
+              {"state": "Northern Territory",    "lon": 134.0, "lat": -20.5},
+              {"state": "ACT",                   "lon": 149.2, "lat": -35.7}
+            ]
+          },
+          "mark": {
+            "type": "text",
+            "fontSize": 10,
+            "fontWeight": "bold",
+            "font": "Arial",
+            "stroke": "white",
+            "strokeWidth": 2,
+            "lineHeight": 12,
+            "dx": 0,
+            "dy": 0
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "text": {"field": "state", "type": "nominal"},
+            "color": {"value": "#1e293b"},
+            "opacity": {"value": 0.85}
+          }
         }
       ]
     },
