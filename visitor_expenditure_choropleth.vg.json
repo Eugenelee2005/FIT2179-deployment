@@ -160,13 +160,12 @@
             "color": {
               "field": "selected_value",
               "type": "quantitative",
-              "title": {
-                "expr": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? 'Change in expenditure (%)' : 'Change in trips (%)') : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? 'Expenditure 2024 ($M)' : 'Trips 2024 (000)') : (selectedMetric == 'Expenditure ($M)' ? 'Expenditure 2025 ($M)' : 'Trips 2025 (000)'))"
-              },
+              "title": "Selected map value",
               "scale": {
                 "scheme": "tealblues"
               },
               "legend": {
+                "title": "Selected map value",
                 "orient": "right",
                 "format": ",.0f"
               }
@@ -251,9 +250,7 @@
               {
                 "field": "selected_value",
                 "type": "quantitative",
-                "title": {
-                  "expr": "selectedView + ' - ' + selectedMetric"
-                },
+                "title": "Selected value",
                 "format": ",.1f"
               }
             ]
@@ -421,9 +418,7 @@
               {
                 "field": "selected_value",
                 "type": "quantitative",
-                "title": {
-                  "expr": "selectedView + ' - ' + selectedMetric"
-                },
+                "title": "Selected value",
                 "format": ",.1f"
               }
             ]
