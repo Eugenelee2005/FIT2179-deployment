@@ -6,12 +6,12 @@
   "background": "#ffffff",
   "params": [
     {
-      "name": "selectedYear",
-      "value": 2025,
+      "name": "selectedView",
+      "value": "Change 2024-2025",
       "bind": {
         "input": "radio",
-        "options": [2024, 2025],
-        "name": "Year: "
+        "options": ["Change 2024-2025", "2024 value", "2025 value"],
+        "name": "View: "
       }
     },
     {
@@ -19,8 +19,8 @@
       "value": "Expenditure ($M)",
       "bind": {
         "input": "radio",
-        "options": ["Expenditure ($M)", "Tourists / trips ('000)"],
-        "name": "Map value: "
+        "options": ["Expenditure ($M)", "Visitor trips ('000)"],
+        "name": "Measure: "
       }
     }
   ],
@@ -28,7 +28,7 @@
     {
       "title": {
         "text": "International visitor activity by Australian state and territory",
-        "subtitle": "Colour changes with the selected year and measure",
+        "subtitle": "Colour changes with the selected view and measure",
         "anchor": "start",
         "font": "Arial",
         "fontSize": 20,
@@ -120,23 +120,23 @@
               "filter": "isValid(datum.expenditure_2025_m)"
             },
             {
-              "calculate": "selectedYear == 2024 ? datum.expenditure_2024_m : datum.expenditure_2025_m",
-              "as": "selected_expenditure_m"
+              "calculate": "selectedView == '2024 value' ? datum.expenditure_2024_m : (selectedView == '2025 value' ? datum.expenditure_2025_m : datum.expenditure_2024_m)",
+              "as": "display_expenditure_m"
             },
             {
-              "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
-              "as": "selected_trips"
+              "calculate": "selectedView == '2024 value' ? datum.trips_2024 : (selectedView == '2025 value' ? datum.trips_2025 : datum.trips_2024)",
+              "as": "display_trips"
             },
             {
-              "calculate": "selectedYear == 2024 ? datum.nights_2024 : datum.nights_2025",
-              "as": "selected_nights"
+              "calculate": "selectedView == '2024 value' ? datum.nights_2024 : (selectedView == '2025 value' ? datum.nights_2025 : datum.nights_2024)",
+              "as": "display_nights"
             },
             {
-              "calculate": "datum.selected_expenditure_m / datum.selected_trips * 1000",
+              "calculate": "datum.display_expenditure_m / datum.display_trips * 1000",
               "as": "avg_spend_per_trip"
             },
             {
-              "calculate": "selectedMetric == 'Expenditure ($M)' ? datum.selected_expenditure_m : datum.selected_trips",
+              "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
               "as": "selected_value"
             }
           ],
@@ -199,11 +199,6 @@
                 "title": "State/Territory"
               },
               {
-                "expr": "selectedYear",
-                "type": "quantitative",
-                "title": "Selected year"
-              },
-              {
                 "field": "expenditure_2024_m",
                 "type": "quantitative",
                 "title": "2024 expenditure ($M)",
@@ -222,22 +217,42 @@
                 "format": "+.1f"
               },
               {
-                "field": "selected_trips",
+                "field": "trips_2024",
                 "type": "quantitative",
-                "title": "International visitor trips ('000)",
+                "title": "2024 visitor trips ('000)",
                 "format": ",.1f"
               },
               {
-                "field": "selected_nights",
+                "field": "trips_2025",
                 "type": "quantitative",
-                "title": "Visitor nights ('000)",
+                "title": "2025 visitor trips ('000)",
+                "format": ",.1f"
+              },
+              {
+                "field": "nights_2024",
+                "type": "quantitative",
+                "title": "2024 visitor nights ('000)",
+                "format": ",.0f"
+              },
+              {
+                "field": "nights_2025",
+                "type": "quantitative",
+                "title": "2025 visitor nights ('000)",
                 "format": ",.0f"
               },
               {
                 "field": "avg_spend_per_trip",
                 "type": "quantitative",
-                "title": "Average spend per trip",
+                "title": "Avg spend per trip",
                 "format": "$,.0f"
+              },
+              {
+                "field": "selected_value",
+                "type": "quantitative",
+                "title": {
+                  "expr": "selectedView + ' - ' + selectedMetric"
+                },
+                "format": ",.1f"
               }
             ]
           }
@@ -307,15 +322,7 @@
               }
             },
             {
-              "calculate": "selectedYear == 2024 ? datum.expenditure_2024_m : datum.expenditure_2025_m",
-              "as": "selected_expenditure_m"
-            },
-            {
-              "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
-              "as": "selected_trips"
-            },
-            {
-              "calculate": "selectedMetric == 'Expenditure ($M)' ? datum.selected_expenditure_m : datum.selected_trips",
+              "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
               "as": "selected_value"
             }
           ],
@@ -340,15 +347,11 @@
                 "title": "State/Territory"
               },
               {
-                "field": "selected_expenditure_m",
+                "field": "selected_value",
                 "type": "quantitative",
-                "title": "Selected expenditure ($M)",
-                "format": "$,.0f"
-              },
-              {
-                "field": "selected_trips",
-                "type": "quantitative",
-                "title": "Selected visitor trips ('000)",
+                "title": {
+                  "expr": "selectedView + ' - ' + selectedMetric"
+                },
                 "format": ",.1f"
               }
             ]
@@ -395,7 +398,8 @@
                   "trips_2024",
                   "trips_2025",
                   "expenditure_2024_m",
-                  "expenditure_2025_m"
+                  "expenditure_2025_m",
+                  "exp_change_pct"
                 ]
               }
             },
@@ -406,19 +410,11 @@
               }
             },
             {
-              "calculate": "selectedYear == 2024 ? datum.expenditure_2024_m : datum.expenditure_2025_m",
-              "as": "selected_expenditure_m"
-            },
-            {
-              "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
-              "as": "selected_trips"
-            },
-            {
-              "calculate": "selectedMetric == 'Expenditure ($M)' ? datum.selected_expenditure_m : datum.selected_trips",
+              "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
               "as": "selected_value"
             },
             {
-              "calculate": "selectedMetric == 'Expenditure ($M)' ? 'Expenditure ($M)' : \"Tourists / trips ('000)\"",
+              "calculate": "selectedMetric == 'Expenditure ($M)' ? 'Expenditure ($M)' : \"Visitor trips ('000)\"",
               "as": "metric_label"
             }
           ],
