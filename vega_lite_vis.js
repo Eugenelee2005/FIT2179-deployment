@@ -1,4 +1,4 @@
-var flowMap = "js/visitor_flow_map.vl.json";
+var flowMap = "visitor_flow_map.vg.json";
 
 vegaEmbed("#flow_map", flowMap, {
   actions: false,
