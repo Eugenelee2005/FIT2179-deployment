@@ -160,7 +160,9 @@
             "color": {
               "field": "selected_value",
               "type": "quantitative",
-              "title": "Selected map value",
+              "title": {
+                "expr": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? '% change in expenditure' : '% change in visitor trips') : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? 'Expenditure 2024 ($M)' : \"Visitor trips 2024 ('000)\") : (selectedMetric == 'Expenditure ($M)' ? 'Expenditure 2025 ($M)' : \"Visitor trips 2025 ('000)\"))"
+              },
               "scale": {
                 "scheme": "tealblues"
               },
