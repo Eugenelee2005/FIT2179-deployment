@@ -161,7 +161,7 @@
               "field": "selected_value",
               "type": "quantitative",
               "title": {
-                "expr": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? '% change in expenditure' : '% change in visitor trips') : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? 'Expenditure 2024 ($M)' : \"Visitor trips 2024 ('000)\") : (selectedMetric == 'Expenditure ($M)' ? 'Expenditure 2025 ($M)' : \"Visitor trips 2025 ('000)\"))"
+                "expr": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? 'Change in expenditure (%)' : 'Change in trips (%)') : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? 'Expenditure 2024 ($M)' : 'Trips 2024 (000)') : (selectedMetric == 'Expenditure ($M)' ? 'Expenditure 2025 ($M)' : 'Trips 2025 (000)'))"
               },
               "scale": {
                 "scheme": "tealblues"
@@ -269,16 +269,55 @@
               {"state": "Western Australia",     "lon": 121.0, "lat": -25.5},
               {"state": "Tasmania",              "lon": 147.0, "lat": -41.8},
               {"state": "Northern Territory",    "lon": 134.0, "lat": -20.5},
-              {"state": "ACT",                   "lon": 149.2, "lat": -35.7}
+              {"state": "Australian Capital Territory", "lon": 149.2, "lat": -35.7}
             ]
           },
+          "transform": [
+            {
+              "lookup": "state",
+              "from": {
+                "data": {
+                  "url": "data/state_expenditure.csv",
+                  "format": {
+                    "type": "csv",
+                    "parse": {
+                      "trips_2024": "number",
+                      "trips_2025": "number",
+                      "expenditure_2024_m": "number",
+                      "expenditure_2025_m": "number",
+                      "exp_change_pct": "number"
+                    }
+                  }
+                },
+                "key": "state",
+                "fields": [
+                  "trips_2024",
+                  "trips_2025",
+                  "expenditure_2024_m",
+                  "expenditure_2025_m",
+                  "exp_change_pct"
+                ]
+              }
+            },
+            {
+              "filter": "isValid(datum.expenditure_2025_m)"
+            },
+            {
+              "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
+              "as": "selected_value"
+            },
+            {
+              "calculate": "selectedView == 'Change 2024-2025' ? format(datum.selected_value, '+.1f') + '%' : format(datum.selected_value, ',.0f')",
+              "as": "label_text"
+            }
+          ],
           "mark": {
             "type": "text",
-            "fontSize": 10,
+            "fontSize": 11,
             "fontWeight": "bold",
             "font": "Arial",
             "stroke": "white",
-            "strokeWidth": 2,
+            "strokeWidth": 2.5,
             "lineHeight": 12,
             "dx": 0,
             "dy": 0
@@ -286,9 +325,9 @@
           "encoding": {
             "longitude": {"field": "lon", "type": "quantitative"},
             "latitude": {"field": "lat", "type": "quantitative"},
-            "text": {"field": "state", "type": "nominal"},
+            "text": {"field": "label_text", "type": "nominal"},
             "color": {"value": "#1e293b"},
-            "opacity": {"value": 0.85}
+            "opacity": {"value": 0.9}
           }
         }
       ]
