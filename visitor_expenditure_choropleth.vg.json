@@ -313,12 +313,11 @@
           ],
           "mark": {
             "type": "text",
-            "fontSize": 11,
-            "fontWeight": "bold",
+            "fontSize": 12,
+            "fontWeight": "normal",
             "font": "Arial",
             "stroke": "white",
-            "strokeWidth": 2.5,
-            "lineHeight": 12,
+            "strokeWidth": 0.8,
             "dx": 0,
             "dy": 0
           },
@@ -326,8 +325,8 @@
             "longitude": {"field": "lon", "type": "quantitative"},
             "latitude": {"field": "lat", "type": "quantitative"},
             "text": {"field": "label_text", "type": "nominal"},
-            "color": {"value": "#1e293b"},
-            "opacity": {"value": 0.9}
+            "color": {"value": "#0f172a"},
+            "opacity": {"value": 0.95}
           }
         }
       ]
@@ -545,7 +544,9 @@
       "titleFont": "Arial",
       "labelFontSize": 11,
       "titleFontSize": 12,
-      "gradientLength": 220
+      "gradientLength": 220,
+      "titleColor": "#1e293b",
+      "labelColor": "#1e293b"
     },
     "axis": {
       "labelFont": "Arial",
