@@ -7,20 +7,17 @@
   "params": [
     {
       "name": "selectedView",
-      "value": "Change 2024-2025",
+      "value": "% change expenditure",
       "bind": {
         "input": "radio",
-        "options": ["Change 2024-2025", "2024 value", "2025 value"],
+        "options": [
+          "% change expenditure",
+          "2024 expenditure",
+          "2025 expenditure",
+          "2024 visitor trips",
+          "2025 visitor trips"
+        ],
         "name": "View: "
-      }
-    },
-    {
-      "name": "selectedMetric",
-      "value": "Expenditure ($M)",
-      "bind": {
-        "input": "radio",
-        "options": ["Expenditure ($M)", "Visitor trips ('000)"],
-        "name": "Measure: "
       }
     }
   ],
@@ -28,7 +25,7 @@
     {
       "title": {
         "text": "International visitor activity by Australian state and territory",
-        "subtitle": "Colour changes with the selected view and measure",
+        "subtitle": "Colour and labels update with the selected view",
         "anchor": "start",
         "font": "Arial",
         "fontSize": 20,
@@ -120,24 +117,28 @@
               "filter": "isValid(datum.expenditure_2025_m)"
             },
             {
-              "calculate": "selectedView == '2024 value' ? datum.expenditure_2024_m : (selectedView == '2025 value' ? datum.expenditure_2025_m : datum.expenditure_2024_m)",
-              "as": "display_expenditure_m"
+              "calculate": "(datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100",
+              "as": "trips_change_pct"
             },
             {
-              "calculate": "selectedView == '2024 value' ? datum.trips_2024 : (selectedView == '2025 value' ? datum.trips_2025 : datum.trips_2024)",
-              "as": "display_trips"
-            },
-            {
-              "calculate": "selectedView == '2024 value' ? datum.nights_2024 : (selectedView == '2025 value' ? datum.nights_2025 : datum.nights_2024)",
-              "as": "display_nights"
-            },
-            {
-              "calculate": "datum.display_expenditure_m / datum.display_trips * 1000",
-              "as": "avg_spend_per_trip"
-            },
-            {
-              "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
+              "calculate": "selectedView == '% change expenditure' ? datum.exp_change_pct : (selectedView == '2024 expenditure' ? datum.expenditure_2024_m : (selectedView == '2025 expenditure' ? datum.expenditure_2025_m : (selectedView == '2024 visitor trips' ? datum.trips_2024 : datum.trips_2025)))",
               "as": "selected_value"
+            },
+            {
+              "calculate": "selectedView == '% change expenditure' ? (datum.selected_value < 0 ? '#e66101' : (datum.selected_value < 10 ? '#b8b8b8' : (datum.selected_value < 20 ? '#67a9cf' : '#2166ac'))) : (selectedView == '2024 expenditure' || selectedView == '2025 expenditure' ? (datum.selected_value < 1500 ? '#dbeafe' : (datum.selected_value < 4000 ? '#93c5fd' : (datum.selected_value < 8000 ? '#3b82f6' : '#1e3a8a'))) : (datum.selected_value < 500 ? '#ede9fe' : (datum.selected_value < 1500 ? '#c4b5fd' : (datum.selected_value < 3000 ? '#8b5cf6' : '#4c1d95'))))",
+              "as": "map_color"
+            },
+            {
+              "calculate": "selectedView == '% change expenditure' ? datum.exp_change_pct : (selectedView == '2024 visitor trips' || selectedView == '2025 visitor trips' ? datum.trips_change_pct : datum.exp_change_pct)",
+              "as": "label_change_pct"
+            },
+            {
+              "calculate": "datum.selected_value / 1000",
+              "as": "selected_value_millions"
+            },
+            {
+              "calculate": "datum.expenditure_2025_m / datum.trips_2025 * 1000",
+              "as": "avg_spend_per_trip_2025"
             }
           ],
           "params": [
@@ -158,17 +159,10 @@
           },
           "encoding": {
             "color": {
-              "field": "selected_value",
-              "type": "quantitative",
-              "title": "Change in expenditure (%)",
-              "scale": {
-                "range": ["#475569", "#1d4ed8", "#0f766e"]
-              },
-              "legend": {
-                "title": "Change in expenditure (%)",
-                "orient": "right",
-                "format": ",.0f"
-              }
+              "field": "map_color",
+              "type": "nominal",
+              "scale": null,
+              "legend": null
             },
             "stroke": {
               "condition": {
@@ -191,7 +185,7 @@
                 "param": "stateSelection",
                 "value": 1
               },
-              "value": 0.7
+              "value": 0.72
             },
             "tooltip": [
               {
@@ -230,10 +224,10 @@
                 "format": ",.1f"
               },
               {
-                "field": "nights_2024",
+                "field": "trips_change_pct",
                 "type": "quantitative",
-                "title": "2024 visitor nights ('000)",
-                "format": ",.0f"
+                "title": "% change in visitor trips",
+                "format": "+.1f"
               },
               {
                 "field": "nights_2025",
@@ -242,9 +236,9 @@
                 "format": ",.0f"
               },
               {
-                "field": "avg_spend_per_trip",
+                "field": "avg_spend_per_trip_2025",
                 "type": "quantitative",
-                "title": "Avg spend per trip",
+                "title": "Average spend per trip",
                 "format": "$,.0f"
               },
               {
@@ -259,14 +253,14 @@
         {
           "data": {
             "values": [
-              {"state": "New South Wales",       "lon": 146.5, "lat": -32.8},
-              {"state": "Victoria",              "lon": 144.5, "lat": -36.9},
-              {"state": "Queensland",            "lon": 143.5, "lat": -22.5},
-              {"state": "South Australia",       "lon": 135.5, "lat": -30.8},
-              {"state": "Western Australia",     "lon": 121.0, "lat": -25.5},
-              {"state": "Tasmania",              "lon": 147.0, "lat": -41.8},
-              {"state": "Northern Territory",    "lon": 134.0, "lat": -20.5},
-              {"state": "Australian Capital Territory", "lon": 149.2, "lat": -35.7}
+              {"state": "New South Wales", "abbr": "NSW", "lon": 146.5, "lat": -32.8},
+              {"state": "Victoria", "abbr": "VIC", "lon": 144.5, "lat": -36.9},
+              {"state": "Queensland", "abbr": "QLD", "lon": 143.5, "lat": -22.5},
+              {"state": "South Australia", "abbr": "SA", "lon": 135.5, "lat": -30.8},
+              {"state": "Western Australia", "abbr": "WA", "lon": 121.0, "lat": -25.5},
+              {"state": "Tasmania", "abbr": "TAS", "lon": 147.0, "lat": -41.8},
+              {"state": "Northern Territory", "abbr": "NT", "lon": 134.0, "lat": -20.5},
+              {"state": "Australian Capital Territory", "abbr": "ACT", "lon": 149.2, "lat": -35.7}
             ]
           },
           "transform": [
@@ -300,28 +294,44 @@
               "filter": "isValid(datum.expenditure_2025_m)"
             },
             {
-              "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
-              "as": "selected_value"
+              "calculate": "(datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100",
+              "as": "trips_change_pct"
             },
             {
-              "calculate": "selectedView == 'Change 2024-2025' ? format(datum.selected_value, '+.1f') + '%' : format(datum.selected_value, ',.0f')",
+              "calculate": "selectedView == '% change expenditure' ? datum.abbr + ' ' + format(datum.exp_change_pct, '+.1f') + '%' : (selectedView == '2024 expenditure' ? datum.abbr + ' $' + format(datum.expenditure_2024_m, ',.0f') + 'M' : (selectedView == '2025 expenditure' ? datum.abbr + ' $' + format(datum.expenditure_2025_m, ',.0f') + 'M' : (selectedView == '2024 visitor trips' ? datum.abbr + ' ' + format(datum.trips_2024, ',.0f') + 'k' : datum.abbr + ' ' + format(datum.trips_2025, ',.0f') + 'k')))",
               "as": "label_text"
             }
           ],
           "mark": {
             "type": "text",
-            "fontSize": 11,
+            "fontSize": 10,
             "fontWeight": "normal",
             "font": "Arial",
+            "stroke": "#111827",
+            "strokeWidth": 1.1,
+            "strokeOpacity": 0.55,
             "dx": 0,
             "dy": 0
           },
           "encoding": {
-            "longitude": {"field": "lon", "type": "quantitative"},
-            "latitude": {"field": "lat", "type": "quantitative"},
-            "text": {"field": "label_text", "type": "nominal"},
-            "color": {"value": "#ffffff"},
-            "opacity": {"value": 0.95}
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label_text",
+              "type": "nominal"
+            },
+            "color": {
+              "value": "#ffffff"
+            },
+            "opacity": {
+              "value": 0.97
+            }
           }
         }
       ]
@@ -362,8 +372,6 @@
                     "parse": {
                       "trips_2024": "number",
                       "trips_2025": "number",
-                      "nights_2024": "number",
-                      "nights_2025": "number",
                       "expenditure_2024_m": "number",
                       "expenditure_2025_m": "number",
                       "exp_change_pct": "number"
@@ -374,8 +382,6 @@
                 "fields": [
                   "trips_2024",
                   "trips_2025",
-                  "nights_2024",
-                  "nights_2025",
                   "expenditure_2024_m",
                   "expenditure_2025_m",
                   "exp_change_pct"
@@ -389,8 +395,12 @@
               }
             },
             {
-              "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
+              "calculate": "selectedView == '% change expenditure' ? datum.exp_change_pct : (selectedView == '2024 expenditure' ? datum.expenditure_2024_m : (selectedView == '2025 expenditure' ? datum.expenditure_2025_m : (selectedView == '2024 visitor trips' ? datum.trips_2024 : datum.trips_2025)))",
               "as": "selected_value"
+            },
+            {
+              "calculate": "selectedView == '% change expenditure' ? (datum.selected_value < 0 ? '#e66101' : (datum.selected_value < 10 ? '#b8b8b8' : (datum.selected_value < 20 ? '#67a9cf' : '#2166ac'))) : (selectedView == '2024 expenditure' || selectedView == '2025 expenditure' ? (datum.selected_value < 1500 ? '#dbeafe' : (datum.selected_value < 4000 ? '#93c5fd' : (datum.selected_value < 8000 ? '#3b82f6' : '#1e3a8a'))) : (datum.selected_value < 500 ? '#ede9fe' : (datum.selected_value < 1500 ? '#c4b5fd' : (datum.selected_value < 3000 ? '#8b5cf6' : '#4c1d95'))))",
+              "as": "map_color"
             }
           ],
           "mark": {
@@ -400,11 +410,9 @@
           },
           "encoding": {
             "color": {
-              "field": "selected_value",
-              "type": "quantitative",
-              "scale": {
-                "range": ["#475569", "#1d4ed8", "#0f766e"]
-              },
+              "field": "map_color",
+              "type": "nominal",
+              "scale": null,
               "legend": null
             },
             "tooltip": [
@@ -454,7 +462,8 @@
                       "trips_2024": "number",
                       "trips_2025": "number",
                       "expenditure_2024_m": "number",
-                      "expenditure_2025_m": "number"
+                      "expenditure_2025_m": "number",
+                      "exp_change_pct": "number"
                     }
                   }
                 },
@@ -475,11 +484,11 @@
               }
             },
             {
-              "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
+              "calculate": "selectedView == '% change expenditure' ? datum.exp_change_pct : (selectedView == '2024 expenditure' ? datum.expenditure_2024_m : (selectedView == '2025 expenditure' ? datum.expenditure_2025_m : (selectedView == '2024 visitor trips' ? datum.trips_2024 : datum.trips_2025)))",
               "as": "selected_value"
             },
             {
-              "calculate": "selectedMetric == 'Expenditure ($M)' ? 'Expenditure ($M)' : \"Visitor trips ('000)\"",
+              "calculate": "selectedView",
               "as": "metric_label"
             }
           ],
@@ -502,7 +511,7 @@
               "title": null
             },
             "color": {
-              "value": "#0f766e"
+              "value": "#2563eb"
             },
             "tooltip": [
               {
@@ -513,7 +522,7 @@
               {
                 "field": "metric_label",
                 "type": "nominal",
-                "title": "Metric"
+                "title": "View"
               },
               {
                 "field": "selected_value",
