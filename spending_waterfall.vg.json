@@ -4,14 +4,14 @@
   "height": 470,
   "background": "#ffffff",
   "title": {
-    "text": "What drove the change in visitor spending?",
-    "subtitle": "The waterfall chart shows how each travel purpose contributed to the difference between 2024 and 2025 spending.",
+    "text": "Drivers of visitor spending change",
+    "subtitle": "Bars show how travel purposes contributed to the 2024-2025 spending increase.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 22,
-    "subtitleFontSize": 13,
+    "fontSize": 18,
+    "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
-    "offset": 12
+    "offset": 10
   },
   "data": {
     "url": "data/waterfall_spending_change.csv"
@@ -70,8 +70,16 @@
           "type": "nominal",
           "title": "Component type",
           "scale": {
-            "domain": ["increase", "decrease", "total"],
-            "range": ["#0072b2", "#d95f02", "#737373"]
+            "domain": [
+              "increase",
+              "decrease",
+              "total"
+            ],
+            "range": [
+              "#0072b2",
+              "#d95f02",
+              "#737373"
+            ]
           }
         },
         "tooltip": [

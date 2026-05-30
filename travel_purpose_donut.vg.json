@@ -4,14 +4,14 @@
   "height": 440,
   "background": "#ffffff",
   "title": {
-    "text": "Why do international visitors come to Australia?",
-    "subtitle": "Select 2024 or 2025 to compare visitor-trip shares by main travel purpose.",
+    "text": "Visitor trips by travel purpose",
+    "subtitle": "Use the year selector to compare the purpose mix.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 22,
-    "subtitleFontSize": 13,
+    "fontSize": 18,
+    "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
-    "offset": 12
+    "offset": 10
   },
   "params": [
     {
@@ -19,7 +19,10 @@
       "value": 2025,
       "bind": {
         "input": "select",
-        "options": [2024, 2025],
+        "options": [
+          2024,
+          2025
+        ],
         "name": "Year: "
       }
     }
@@ -60,7 +63,14 @@
           "Employment",
           "Other"
         ],
-        "range": ["#0072b2", "#56b4e9", "#e69f00", "#cc79a7", "#6a51a3", "#999999"]
+        "range": [
+          "#0072b2",
+          "#56b4e9",
+          "#e69f00",
+          "#cc79a7",
+          "#6a51a3",
+          "#999999"
+        ]
       }
     },
     "tooltip": [

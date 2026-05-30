@@ -4,14 +4,14 @@
   "height": 520,
   "background": "#ffffff",
   "title": {
-    "text": "Where international visitors stay the longest",
-    "subtitle": "Top tourism regions ranked by visitor nights in 2025.",
+    "text": "Top tourism regions by visitor nights",
+    "subtitle": "The longest lollipops show where international visitors spent the most nights.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 22,
-    "subtitleFontSize": 13,
+    "fontSize": 18,
+    "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
-    "offset": 12
+    "offset": 10
   },
   "data": {
     "url": "data/top_regions.csv"
@@ -78,6 +78,12 @@
           "field": "nights_2025",
           "type": "quantitative",
           "title": "2025 visitor nights ('000)",
+          "scale": {
+            "domain": [
+              0,
+              100000
+            ]
+          },
           "axis": {
             "format": ",.0f",
             "gridColor": "#e5edf3",
@@ -121,6 +127,52 @@
             "format": ".1f"
           }
         ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.rank == 1"
+        },
+        {
+          "calculate": "'Sydney: top region'",
+          "as": "annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 12,
+        "font": "Arial",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#102033"
+      },
+      "encoding": {
+        "y": {
+          "field": "region",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "nights_2025",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "nights_2025",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100000
+            ]
+          }
+        },
+        "text": {
+          "field": "annotation",
+          "type": "nominal"
+        }
       }
     }
   ],

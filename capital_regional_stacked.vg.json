@@ -4,14 +4,14 @@
   "height": 420,
   "background": "#ffffff",
   "title": {
-    "text": "Do visitors stay in capital cities or regional Australia?",
-    "subtitle": "Each bar shows the capital city/gateway and regional share of visitor activity within each state or territory.",
+    "text": "Capital city and regional share",
+    "subtitle": "Each bar is normalised to show the within-state split.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 22,
-    "subtitleFontSize": 13,
+    "fontSize": 18,
+    "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
-    "offset": 12
+    "offset": 10
   },
   "params": [
     {
@@ -19,7 +19,11 @@
       "value": "Nights",
       "bind": {
         "input": "select",
-        "options": ["Trips", "Nights", "Expenditure"],
+        "options": [
+          "Trips",
+          "Nights",
+          "Expenditure"
+        ],
         "name": "Measure: "
       }
     }
@@ -72,8 +76,14 @@
       "type": "nominal",
       "title": "Area type",
       "scale": {
-        "domain": ["Capital city / gateway", "Regional area"],
-        "range": ["#0072b2", "#e69f00"]
+        "domain": [
+          "Capital city / gateway",
+          "Regional area"
+        ],
+        "range": [
+          "#0072b2",
+          "#e69f00"
+        ]
       }
     },
     "tooltip": [

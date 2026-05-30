@@ -4,26 +4,36 @@
   "height": 500,
   "background": "#ffffff",
   "title": {
-    "text": "Where Australia\u2019s international visitors come from",
-    "subtitle": "Top 12 source countries by visitor trips, year ending December 2025",
+    "text": "Where Australia's international visitors come from",
+    "subtitle": "Line thickness is based on 2025 visitor trips from each source country.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 20,
+    "fontSize": 18,
     "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
-    "offset": 12
+    "offset": 10
   },
   "projection": {
     "type": "equalEarth",
-    "rotate": [-150, 0, 0],
+    "rotate": [
+      -150,
+      0,
+      0
+    ],
     "scale": 190,
-    "translate": [410, 255]
+    "translate": [
+      410,
+      255
+    ]
   },
   "layer": [
     {
       "data": {
         "graticule": {
-          "step": [30, 30]
+          "step": [
+            30,
+            30
+          ]
         }
       },
       "mark": {
@@ -78,8 +88,18 @@
           "field": "region",
           "type": "nominal",
           "scale": {
-            "domain": ["Asia", "Europe", "North America", "Oceania"],
-            "range": ["#0072b2", "#cc79a7", "#e69f00", "#999999"]
+            "domain": [
+              "Asia",
+              "Europe",
+              "North America",
+              "Oceania"
+            ],
+            "range": [
+              "#0072b2",
+              "#cc79a7",
+              "#e69f00",
+              "#999999"
+            ]
           },
           "legend": {
             "title": "Origin region"
@@ -89,8 +109,14 @@
           "field": "trips_2025",
           "type": "quantitative",
           "scale": {
-            "domain": [170, 1305],
-            "range": [1, 8]
+            "domain": [
+              170,
+              1305
+            ],
+            "range": [
+              1,
+              8
+            ]
           },
           "legend": {
             "title": "Trips ('000)"
@@ -152,8 +178,14 @@
           "field": "trips_2025",
           "type": "quantitative",
           "scale": {
-            "domain": [170, 1305],
-            "range": [45, 550]
+            "domain": [
+              170,
+              1305
+            ],
+            "range": [
+              45,
+              550
+            ]
           },
           "legend": null
         },
@@ -161,8 +193,18 @@
           "field": "region",
           "type": "nominal",
           "scale": {
-            "domain": ["Asia", "Europe", "North America", "Oceania"],
-            "range": ["#0072b2", "#cc79a7", "#e69f00", "#999999"]
+            "domain": [
+              "Asia",
+              "Europe",
+              "North America",
+              "Oceania"
+            ],
+            "range": [
+              "#0072b2",
+              "#cc79a7",
+              "#e69f00",
+              "#999999"
+            ]
           },
           "legend": null
         },

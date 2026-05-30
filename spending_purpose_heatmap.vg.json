@@ -4,14 +4,14 @@
   "height": 480,
   "background": "#ffffff",
   "title": {
-    "text": "Different visitors spend in different ways",
-    "subtitle": "The heatmap shows which visitor purposes contribute most to each spending category.",
+    "text": "Spending category by travel purpose",
+    "subtitle": "Darker blue cells show higher 2025 expenditure.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 22,
-    "subtitleFontSize": 13,
+    "fontSize": 18,
+    "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
-    "offset": 12
+    "offset": 10
   },
   "data": {
     "url": "data/spending_by_purpose.csv"
@@ -70,7 +70,12 @@
       "type": "quantitative",
       "title": "Expenditure ($M)",
       "scale": {
-        "range": ["#deebf7", "#9ecae1", "#3182bd", "#08519c"]
+        "range": [
+          "#deebf7",
+          "#9ecae1",
+          "#3182bd",
+          "#08519c"
+        ]
       },
       "legend": {
         "format": "$,.0f"

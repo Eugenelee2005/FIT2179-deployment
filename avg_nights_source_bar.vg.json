@@ -4,14 +4,14 @@
   "height": 620,
   "background": "#ffffff",
   "title": {
-    "text": "Which visitors stay the longest?",
-    "subtitle": "Average nights per trip shows how long visitors from each source market tend to remain in Australia.",
+    "text": "Average nights per trip by source country",
+    "subtitle": "Longer bars indicate source markets whose visitors stayed longer on average.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 22,
-    "subtitleFontSize": 13,
+    "fontSize": 18,
+    "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
-    "offset": 12
+    "offset": 10
   },
   "data": {
     "url": "data/source_countries.csv"
@@ -48,7 +48,12 @@
       "type": "quantitative",
       "legend": null,
       "scale": {
-        "range": ["#deebf7", "#9ecae1", "#3182bd", "#08519c"]
+        "range": [
+          "#deebf7",
+          "#9ecae1",
+          "#3182bd",
+          "#08519c"
+        ]
       }
     },
     "tooltip": [

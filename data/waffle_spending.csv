@@ -1,101 +1,101 @@
 square_id,column,row,spending_category,expenditure_2025_m,share_of_major_spending_pct,squares
-1,0,9,Airfares,13749.176,25.74,26
-2,1,9,Airfares,13749.176,25.74,26
-3,2,9,Airfares,13749.176,25.74,26
-4,3,9,Airfares,13749.176,25.74,26
-5,4,9,Airfares,13749.176,25.74,26
-6,5,9,Airfares,13749.176,25.74,26
-7,6,9,Airfares,13749.176,25.74,26
-8,7,9,Airfares,13749.176,25.74,26
-9,8,9,Airfares,13749.176,25.74,26
-10,9,9,Airfares,13749.176,25.74,26
-11,0,8,Airfares,13749.176,25.74,26
-12,1,8,Airfares,13749.176,25.74,26
-13,2,8,Airfares,13749.176,25.74,26
-14,3,8,Airfares,13749.176,25.74,26
-15,4,8,Airfares,13749.176,25.74,26
-16,5,8,Airfares,13749.176,25.74,26
-17,6,8,Airfares,13749.176,25.74,26
-18,7,8,Airfares,13749.176,25.74,26
-19,8,8,Airfares,13749.176,25.74,26
-20,9,8,Airfares,13749.176,25.74,26
-21,0,7,Airfares,13749.176,25.74,26
-22,1,7,Airfares,13749.176,25.74,26
-23,2,7,Airfares,13749.176,25.74,26
-24,3,7,Airfares,13749.176,25.74,26
-25,4,7,Airfares,13749.176,25.74,26
-26,5,7,Airfares,13749.176,25.74,26
-27,6,7,Tours,4005.099,7.5,7
-28,7,7,Tours,4005.099,7.5,7
-29,8,7,Tours,4005.099,7.5,7
-30,9,7,Tours,4005.099,7.5,7
-31,0,6,Tours,4005.099,7.5,7
-32,1,6,Tours,4005.099,7.5,7
-33,2,6,Tours,4005.099,7.5,7
-34,3,6,Transportation,2716.652,5.09,5
-35,4,6,Transportation,2716.652,5.09,5
-36,5,6,Transportation,2716.652,5.09,5
-37,6,6,Transportation,2716.652,5.09,5
-38,7,6,Transportation,2716.652,5.09,5
-39,8,6,"Food, drink & accommodation",19000.199,35.57,36
-40,9,6,"Food, drink & accommodation",19000.199,35.57,36
-41,0,5,"Food, drink & accommodation",19000.199,35.57,36
-42,1,5,"Food, drink & accommodation",19000.199,35.57,36
-43,2,5,"Food, drink & accommodation",19000.199,35.57,36
-44,3,5,"Food, drink & accommodation",19000.199,35.57,36
-45,4,5,"Food, drink & accommodation",19000.199,35.57,36
-46,5,5,"Food, drink & accommodation",19000.199,35.57,36
-47,6,5,"Food, drink & accommodation",19000.199,35.57,36
-48,7,5,"Food, drink & accommodation",19000.199,35.57,36
-49,8,5,"Food, drink & accommodation",19000.199,35.57,36
-50,9,5,"Food, drink & accommodation",19000.199,35.57,36
-51,0,4,"Food, drink & accommodation",19000.199,35.57,36
-52,1,4,"Food, drink & accommodation",19000.199,35.57,36
-53,2,4,"Food, drink & accommodation",19000.199,35.57,36
-54,3,4,"Food, drink & accommodation",19000.199,35.57,36
-55,4,4,"Food, drink & accommodation",19000.199,35.57,36
-56,5,4,"Food, drink & accommodation",19000.199,35.57,36
-57,6,4,"Food, drink & accommodation",19000.199,35.57,36
-58,7,4,"Food, drink & accommodation",19000.199,35.57,36
-59,8,4,"Food, drink & accommodation",19000.199,35.57,36
-60,9,4,"Food, drink & accommodation",19000.199,35.57,36
-61,0,3,"Food, drink & accommodation",19000.199,35.57,36
-62,1,3,"Food, drink & accommodation",19000.199,35.57,36
-63,2,3,"Food, drink & accommodation",19000.199,35.57,36
-64,3,3,"Food, drink & accommodation",19000.199,35.57,36
-65,4,3,"Food, drink & accommodation",19000.199,35.57,36
-66,5,3,"Food, drink & accommodation",19000.199,35.57,36
-67,6,3,"Food, drink & accommodation",19000.199,35.57,36
-68,7,3,"Food, drink & accommodation",19000.199,35.57,36
-69,8,3,"Food, drink & accommodation",19000.199,35.57,36
-70,9,3,"Food, drink & accommodation",19000.199,35.57,36
-71,0,2,"Food, drink & accommodation",19000.199,35.57,36
-72,1,2,"Food, drink & accommodation",19000.199,35.57,36
-73,2,2,"Food, drink & accommodation",19000.199,35.57,36
-74,3,2,"Food, drink & accommodation",19000.199,35.57,36
-75,4,2,Shopping,4424.088,8.28,8
-76,5,2,Shopping,4424.088,8.28,8
-77,6,2,Shopping,4424.088,8.28,8
-78,7,2,Shopping,4424.088,8.28,8
-79,8,2,Shopping,4424.088,8.28,8
-80,9,2,Shopping,4424.088,8.28,8
-81,0,1,Shopping,4424.088,8.28,8
-82,1,1,Shopping,4424.088,8.28,8
-83,2,1,Entertainment,1004.532,1.88,2
-84,3,1,Entertainment,1004.532,1.88,2
-85,4,1,Education,8510.936,15.93,16
-86,5,1,Education,8510.936,15.93,16
-87,6,1,Education,8510.936,15.93,16
-88,7,1,Education,8510.936,15.93,16
-89,8,1,Education,8510.936,15.93,16
-90,9,1,Education,8510.936,15.93,16
-91,0,0,Education,8510.936,15.93,16
-92,1,0,Education,8510.936,15.93,16
-93,2,0,Education,8510.936,15.93,16
-94,3,0,Education,8510.936,15.93,16
-95,4,0,Education,8510.936,15.93,16
-96,5,0,Education,8510.936,15.93,16
-97,6,0,Education,8510.936,15.93,16
-98,7,0,Education,8510.936,15.93,16
-99,8,0,Education,8510.936,15.93,16
-100,9,0,Education,8510.936,15.93,16
+1,0,0,"Food, drink & accommodation",19000.199,35.57,36
+2,1,0,"Food, drink & accommodation",19000.199,35.57,36
+3,2,0,"Food, drink & accommodation",19000.199,35.57,36
+4,3,0,"Food, drink & accommodation",19000.199,35.57,36
+5,4,0,"Food, drink & accommodation",19000.199,35.57,36
+6,5,0,"Food, drink & accommodation",19000.199,35.57,36
+7,6,0,"Food, drink & accommodation",19000.199,35.57,36
+8,7,0,"Food, drink & accommodation",19000.199,35.57,36
+9,8,0,"Food, drink & accommodation",19000.199,35.57,36
+10,9,0,"Food, drink & accommodation",19000.199,35.57,36
+11,0,1,"Food, drink & accommodation",19000.199,35.57,36
+12,1,1,"Food, drink & accommodation",19000.199,35.57,36
+13,2,1,"Food, drink & accommodation",19000.199,35.57,36
+14,3,1,"Food, drink & accommodation",19000.199,35.57,36
+15,4,1,"Food, drink & accommodation",19000.199,35.57,36
+16,5,1,"Food, drink & accommodation",19000.199,35.57,36
+17,6,1,"Food, drink & accommodation",19000.199,35.57,36
+18,7,1,"Food, drink & accommodation",19000.199,35.57,36
+19,8,1,"Food, drink & accommodation",19000.199,35.57,36
+20,9,1,"Food, drink & accommodation",19000.199,35.57,36
+21,0,2,"Food, drink & accommodation",19000.199,35.57,36
+22,1,2,"Food, drink & accommodation",19000.199,35.57,36
+23,2,2,"Food, drink & accommodation",19000.199,35.57,36
+24,3,2,"Food, drink & accommodation",19000.199,35.57,36
+25,4,2,"Food, drink & accommodation",19000.199,35.57,36
+26,5,2,"Food, drink & accommodation",19000.199,35.57,36
+27,6,2,"Food, drink & accommodation",19000.199,35.57,36
+28,7,2,"Food, drink & accommodation",19000.199,35.57,36
+29,8,2,"Food, drink & accommodation",19000.199,35.57,36
+30,9,2,"Food, drink & accommodation",19000.199,35.57,36
+31,0,3,"Food, drink & accommodation",19000.199,35.57,36
+32,1,3,"Food, drink & accommodation",19000.199,35.57,36
+33,2,3,"Food, drink & accommodation",19000.199,35.57,36
+34,3,3,"Food, drink & accommodation",19000.199,35.57,36
+35,4,3,"Food, drink & accommodation",19000.199,35.57,36
+36,5,3,"Food, drink & accommodation",19000.199,35.57,36
+37,6,3,Airfares,13749.176,25.74,26
+38,7,3,Airfares,13749.176,25.74,26
+39,8,3,Airfares,13749.176,25.74,26
+40,9,3,Airfares,13749.176,25.74,26
+41,0,4,Airfares,13749.176,25.74,26
+42,1,4,Airfares,13749.176,25.74,26
+43,2,4,Airfares,13749.176,25.74,26
+44,3,4,Airfares,13749.176,25.74,26
+45,4,4,Airfares,13749.176,25.74,26
+46,5,4,Airfares,13749.176,25.74,26
+47,6,4,Airfares,13749.176,25.74,26
+48,7,4,Airfares,13749.176,25.74,26
+49,8,4,Airfares,13749.176,25.74,26
+50,9,4,Airfares,13749.176,25.74,26
+51,0,5,Airfares,13749.176,25.74,26
+52,1,5,Airfares,13749.176,25.74,26
+53,2,5,Airfares,13749.176,25.74,26
+54,3,5,Airfares,13749.176,25.74,26
+55,4,5,Airfares,13749.176,25.74,26
+56,5,5,Airfares,13749.176,25.74,26
+57,6,5,Airfares,13749.176,25.74,26
+58,7,5,Airfares,13749.176,25.74,26
+59,8,5,Airfares,13749.176,25.74,26
+60,9,5,Airfares,13749.176,25.74,26
+61,0,6,Airfares,13749.176,25.74,26
+62,1,6,Airfares,13749.176,25.74,26
+63,2,6,Education,8510.936,15.93,16
+64,3,6,Education,8510.936,15.93,16
+65,4,6,Education,8510.936,15.93,16
+66,5,6,Education,8510.936,15.93,16
+67,6,6,Education,8510.936,15.93,16
+68,7,6,Education,8510.936,15.93,16
+69,8,6,Education,8510.936,15.93,16
+70,9,6,Education,8510.936,15.93,16
+71,0,7,Education,8510.936,15.93,16
+72,1,7,Education,8510.936,15.93,16
+73,2,7,Education,8510.936,15.93,16
+74,3,7,Education,8510.936,15.93,16
+75,4,7,Education,8510.936,15.93,16
+76,5,7,Education,8510.936,15.93,16
+77,6,7,Education,8510.936,15.93,16
+78,7,7,Education,8510.936,15.93,16
+79,8,7,Shopping,4424.088,8.28,8
+80,9,7,Shopping,4424.088,8.28,8
+81,0,8,Shopping,4424.088,8.28,8
+82,1,8,Shopping,4424.088,8.28,8
+83,2,8,Shopping,4424.088,8.28,8
+84,3,8,Shopping,4424.088,8.28,8
+85,4,8,Shopping,4424.088,8.28,8
+86,5,8,Shopping,4424.088,8.28,8
+87,6,8,Tours,4005.099,7.5,7
+88,7,8,Tours,4005.099,7.5,7
+89,8,8,Tours,4005.099,7.5,7
+90,9,8,Tours,4005.099,7.5,7
+91,0,9,Tours,4005.099,7.5,7
+92,1,9,Tours,4005.099,7.5,7
+93,2,9,Tours,4005.099,7.5,7
+94,3,9,Transportation,2716.652,5.09,5
+95,4,9,Transportation,2716.652,5.09,5
+96,5,9,Transportation,2716.652,5.09,5
+97,6,9,Transportation,2716.652,5.09,5
+98,7,9,Transportation,2716.652,5.09,5
+99,8,9,Entertainment,1004.532,1.88,2
+100,9,9,Entertainment,1004.532,1.88,2

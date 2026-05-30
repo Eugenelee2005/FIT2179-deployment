@@ -4,14 +4,14 @@
   "height": 420,
   "background": "#ffffff",
   "title": {
-    "text": "How travel purposes changed from 2024 to 2025",
-    "subtitle": "The distance between the two dots shows whether each travel purpose gained or lost visitor trips.",
+    "text": "Travel purpose change from 2024 to 2025",
+    "subtitle": "Connected dots compare visitor trips for each purpose.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 22,
-    "subtitleFontSize": 13,
+    "fontSize": 18,
+    "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
-    "offset": 12
+    "offset": 10
   },
   "data": {
     "url": "data/travel_purpose.csv"
@@ -87,8 +87,14 @@
     {
       "transform": [
         {
-          "fold": ["trips_2024", "trips_2025"],
-          "as": ["year_field", "trips"]
+          "fold": [
+            "trips_2024",
+            "trips_2025"
+          ],
+          "as": [
+            "year_field",
+            "trips"
+          ]
         },
         {
           "calculate": "datum.year_field == 'trips_2024' ? '2024' : '2025'",
@@ -129,8 +135,14 @@
           "type": "nominal",
           "title": "Year",
           "scale": {
-            "domain": ["2024", "2025"],
-            "range": ["#a6cee3", "#0072b2"]
+            "domain": [
+              "2024",
+              "2025"
+            ],
+            "range": [
+              "#a6cee3",
+              "#0072b2"
+            ]
           }
         },
         "tooltip": [
@@ -164,6 +176,46 @@
             "format": "+.1f"
           }
         ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.purpose == 'Holiday'"
+        },
+        {
+          "calculate": "'Largest increase: +' + format(datum.trips_change_abs, ',.0f') + 'k trips'",
+          "as": "annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 14,
+        "font": "Arial",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#102033"
+      },
+      "encoding": {
+        "y": {
+          "field": "purpose",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "trips_2025",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "trips_2025",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "annotation",
+          "type": "nominal"
+        }
       }
     }
   ],

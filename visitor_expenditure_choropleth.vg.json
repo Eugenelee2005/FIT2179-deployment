@@ -4,13 +4,27 @@
     "resize": true
   },
   "background": "#ffffff",
+  "title": {
+    "text": "Visitor activity by state and territory",
+    "subtitle": "Use the controls to switch between value and percentage-change views.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 10
+  },
   "params": [
     {
       "name": "selectedView",
       "value": "Change 2024-2025",
       "bind": {
         "input": "radio",
-        "options": ["Change 2024-2025", "2024 value", "2025 value"],
+        "options": [
+          "Change 2024-2025",
+          "2024 value",
+          "2025 value"
+        ],
         "name": "View: "
       }
     },
@@ -19,23 +33,16 @@
       "value": "Expenditure ($M)",
       "bind": {
         "input": "radio",
-        "options": ["Expenditure ($M)", "Visitor trips ('000)"],
+        "options": [
+          "Expenditure ($M)",
+          "Visitor trips ('000)"
+        ],
         "name": "Measure: "
       }
     }
   ],
   "vconcat": [
     {
-      "title": {
-        "text": "Where did international visitor activity grow?",
-        "subtitle": "Default view shows 2024-2025 percentage change. Select a year to compare expenditure or visitor trips.",
-        "anchor": "start",
-        "font": "Arial",
-        "fontSize": 20,
-        "subtitleFontSize": 12,
-        "subtitleColor": "#5c6876",
-        "offset": 12
-      },
       "width": 820,
       "height": 500,
       "projection": {
@@ -145,7 +152,9 @@
               "name": "stateSelection",
               "select": {
                 "type": "point",
-                "fields": ["state_name"],
+                "fields": [
+                  "state_name"
+                ],
                 "on": "click",
                 "clear": "dblclick"
               }
@@ -162,7 +171,11 @@
               "type": "quantitative",
               "title": "Change in expenditure (%)",
               "scale": {
-                "range": ["#b35806", "#737373", "#2166ac"]
+                "range": [
+                  "#b35806",
+                  "#737373",
+                  "#2166ac"
+                ]
               },
               "legend": {
                 "title": "Change in expenditure (%)",
@@ -259,14 +272,54 @@
         {
           "data": {
             "values": [
-              {"state": "New South Wales", "abbr": "NSW", "lon": 146.5, "lat": -32.8},
-              {"state": "Victoria", "abbr": "VIC", "lon": 144.5, "lat": -36.9},
-              {"state": "Queensland", "abbr": "QLD", "lon": 143.5, "lat": -22.5},
-              {"state": "South Australia", "abbr": "SA", "lon": 135.5, "lat": -30.8},
-              {"state": "Western Australia", "abbr": "WA", "lon": 121.0, "lat": -25.5},
-              {"state": "Tasmania", "abbr": "TAS", "lon": 147.0, "lat": -41.8},
-              {"state": "Northern Territory", "abbr": "NT", "lon": 134.0, "lat": -20.5},
-              {"state": "Australian Capital Territory", "abbr": "ACT", "lon": 149.2, "lat": -35.7}
+              {
+                "state": "New South Wales",
+                "abbr": "NSW",
+                "lon": 146.5,
+                "lat": -32.8
+              },
+              {
+                "state": "Victoria",
+                "abbr": "VIC",
+                "lon": 144.5,
+                "lat": -36.9
+              },
+              {
+                "state": "Queensland",
+                "abbr": "QLD",
+                "lon": 143.5,
+                "lat": -22.5
+              },
+              {
+                "state": "South Australia",
+                "abbr": "SA",
+                "lon": 135.5,
+                "lat": -30.8
+              },
+              {
+                "state": "Western Australia",
+                "abbr": "WA",
+                "lon": 121,
+                "lat": -25.5
+              },
+              {
+                "state": "Tasmania",
+                "abbr": "TAS",
+                "lon": 147,
+                "lat": -41.8
+              },
+              {
+                "state": "Northern Territory",
+                "abbr": "NT",
+                "lon": 134,
+                "lat": -20.5
+              },
+              {
+                "state": "Australian Capital Territory",
+                "abbr": "ACT",
+                "lon": 149.2,
+                "lat": -35.7
+              }
             ]
           },
           "transform": [
@@ -317,11 +370,24 @@
             "dy": 0
           },
           "encoding": {
-            "longitude": {"field": "lon", "type": "quantitative"},
-            "latitude": {"field": "lat", "type": "quantitative"},
-            "text": {"field": "label_text", "type": "nominal"},
-            "color": {"value": "#ffffff"},
-            "opacity": {"value": 0.95}
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label_text",
+              "type": "nominal"
+            },
+            "color": {
+              "value": "#ffffff"
+            },
+            "opacity": {
+              "value": 0.95
+            }
           }
         }
       ]
@@ -403,7 +469,11 @@
               "field": "selected_value",
               "type": "quantitative",
               "scale": {
-                "range": ["#b35806", "#737373", "#2166ac"]
+                "range": [
+                  "#b35806",
+                  "#737373",
+                  "#2166ac"
+                ]
               },
               "legend": null
             },
