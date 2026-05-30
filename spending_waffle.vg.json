@@ -4,7 +4,6 @@
   "background": "#ffffff",
   "title": {
     "text": "Icon waffle: visitor spending categories",
-    "subtitle": "Each pictogram represents about 1% of selected major 2025 visitor spending.",
     "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
@@ -186,7 +185,7 @@
     "legend": {
       "orient": "bottom",
       "columns": 1,
-      "labelFont": "Arial",
+      "labelFont": "Segoe UI Emoji",
       "titleFont": "Arial",
       "labelFontSize": 12,
       "titleFontSize": 13,

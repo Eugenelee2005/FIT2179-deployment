@@ -3,8 +3,7 @@
   "height": 500,
   "background": "#ffffff",
   "title": {
-    "text": "Where Australia's international visitors come from",
-    "subtitle": "Line thickness is based on 2025 visitor trips from each source country.",
+    "text": "Top Source Country for International Visitors to Australia",
     "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,

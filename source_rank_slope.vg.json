@@ -10,7 +10,6 @@
   "background": "#ffffff",
   "title": {
     "text": "Source country rank change",
-    "subtitle": "Lines connect each source country's rank in 2024 and 2025.",
     "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,

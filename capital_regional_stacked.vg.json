@@ -4,7 +4,6 @@
   "background": "#ffffff",
   "title": {
     "text": "Capital city and regional share",
-    "subtitle": "Each bar is normalised to show the within-state split.",
     "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,

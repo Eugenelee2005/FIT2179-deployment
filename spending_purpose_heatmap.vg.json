@@ -4,7 +4,6 @@
   "background": "#ffffff",
   "title": {
     "text": "Spending category by travel purpose",
-    "subtitle": "Rows and columns are ordered from highest to lowest 2025 expenditure. Darker purple cells show higher expenditure.",
     "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
