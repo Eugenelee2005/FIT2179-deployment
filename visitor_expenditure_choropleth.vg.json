@@ -162,7 +162,7 @@
               "type": "quantitative",
               "title": "Change in expenditure (%)",
               "scale": {
-                "range": ["#475569", "#1d4ed8", "#0f766e"]
+                "range": ["#b35806", "#737373", "#2166ac"]
               },
               "legend": {
                 "title": "Change in expenditure (%)",
@@ -403,7 +403,7 @@
               "field": "selected_value",
               "type": "quantitative",
               "scale": {
-                "range": ["#475569", "#1d4ed8", "#0f766e"]
+                "range": ["#b35806", "#737373", "#2166ac"]
               },
               "legend": null
             },
