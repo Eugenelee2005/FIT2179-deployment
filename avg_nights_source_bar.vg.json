@@ -1,92 +1,196 @@
 {
   "width": 980,
-  "height": 620,
+  "height": 440,
   "background": "#ffffff",
   "title": {
-    "text": "Average nights per trip by source country",
-    "subtitle": "Longer bars indicate source markets whose visitors stayed longer on average.",
-    "anchor": "start",
+    "text": "Top 10 source countries by average nights per trip",
+    "subtitle": "Use the selector to compare the longest-stay source markets in 2024 and 2025.",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
     "offset": 10
   },
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2025,
+      "bind": {
+        "input": "select",
+        "options": [
+          2024,
+          2025
+        ],
+        "name": "Year: "
+      }
+    }
+  ],
   "data": {
     "url": "data/source_countries.csv"
   },
-  "mark": {
-    "type": "bar",
-    "cornerRadiusTopRight": 2,
-    "cornerRadiusBottomRight": 2
-  },
-  "encoding": {
-    "y": {
-      "field": "country",
-      "type": "nominal",
-      "title": null,
-      "sort": "-x",
-      "axis": {
-        "labelLimit": 240,
-        "labelFontSize": 13
-      }
+  "transform": [
+    {
+      "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
+      "as": "selected_trips"
     },
-    "x": {
-      "field": "avg_nights_per_trip_2025",
-      "type": "quantitative",
-      "title": "Average nights per trip",
-      "axis": {
-        "format": ".0f",
-        "gridColor": "#e5edf3",
-        "labelFontSize": 13,
-        "titleFontSize": 13
-      }
+    {
+      "calculate": "selectedYear == 2024 ? datum.nights_2024 : datum.nights_2025",
+      "as": "selected_nights"
     },
-    "color": {
-      "field": "avg_nights_per_trip_2025",
-      "type": "quantitative",
-      "legend": null,
-      "scale": {
-        "range": [
-          "#deebf7",
-          "#9ecae1",
-          "#3182bd",
-          "#08519c"
+    {
+      "calculate": "selectedYear == 2024 ? datum.spend_2024_m : datum.spend_2025_m",
+      "as": "selected_spend_m"
+    },
+    {
+      "calculate": "datum.selected_nights / datum.selected_trips",
+      "as": "selected_avg_nights_per_trip"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? '2024' : '2025'",
+      "as": "selected_year_label"
+    },
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "avg_nights_rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "selected_avg_nights_per_trip",
+          "order": "descending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.avg_nights_rank <= 10"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopRight": 2,
+        "cornerRadiusBottomRight": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "country",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "avg_nights_rank",
+            "order": "ascending"
+          },
+          "axis": {
+            "labelLimit": 240,
+            "labelFontSize": 13
+          }
+        },
+        "x": {
+          "field": "selected_avg_nights_per_trip",
+          "type": "quantitative",
+          "title": "Average nights per trip",
+          "axis": {
+            "format": ".0f",
+            "gridColor": "#e5edf3",
+            "labelFontSize": 13,
+            "titleFontSize": 13
+          }
+        },
+        "color": {
+          "field": "selected_avg_nights_per_trip",
+          "type": "quantitative",
+          "legend": null,
+          "scale": {
+            "range": [
+              "#e5f5e0",
+              "#a1d99b",
+              "#41ab5d",
+              "#006d2c"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "selected_year_label",
+            "type": "nominal",
+            "title": "Selected year"
+          },
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "selected_trips",
+            "type": "quantitative",
+            "title": "Selected-year trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "selected_nights",
+            "type": "quantitative",
+            "title": "Selected-year nights ('000)",
+            "format": ",.0f"
+          },
+          {
+            "field": "selected_avg_nights_per_trip",
+            "type": "quantitative",
+            "title": "Average nights per trip",
+            "format": ".1f"
+          },
+          {
+            "field": "selected_spend_m",
+            "type": "quantitative",
+            "title": "Selected-year expenditure ($M)",
+            "format": "$,.0f"
+          }
         ]
       }
     },
-    "tooltip": [
-      {
-        "field": "country",
-        "type": "nominal",
-        "title": "Country"
+    {
+      "transform": [
+        {
+          "filter": "datum.avg_nights_rank == 1"
+        },
+        {
+          "calculate": "datum.country + ': longest average stay'",
+          "as": "annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "font": "Arial",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#006d2c"
       },
-      {
-        "field": "trips_2025",
-        "type": "quantitative",
-        "title": "2025 trips ('000)",
-        "format": ",.1f"
-      },
-      {
-        "field": "nights_2025",
-        "type": "quantitative",
-        "title": "2025 nights ('000)",
-        "format": ",.0f"
-      },
-      {
-        "field": "avg_nights_per_trip_2025",
-        "type": "quantitative",
-        "title": "Average nights per trip",
-        "format": ".1f"
-      },
-      {
-        "field": "spend_2025_m",
-        "type": "quantitative",
-        "title": "2025 expenditure ($M)",
-        "format": "$,.0f"
+      "encoding": {
+        "y": {
+          "field": "country",
+          "type": "nominal",
+          "sort": {
+            "field": "avg_nights_rank",
+            "order": "ascending"
+          }
+        },
+        "x": {
+          "field": "selected_avg_nights_per_trip",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "annotation",
+          "type": "nominal"
+        }
       }
-    ]
-  },
+    }
+  ],
   "config": {
     "view": {
       "stroke": null

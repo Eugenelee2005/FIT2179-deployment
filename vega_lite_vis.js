@@ -136,14 +136,20 @@ function renderKpiCards() {
 
       target.innerHTML = rows.map(function(row) {
         var change = Number(row.change_pct);
-        var changeLabel = (change >= 0 ? "+" : "") + change.toFixed(1) + "% vs 2024";
-        var changeClass = change >= 0 ? "kpi-change" : "kpi-change negative";
+        var isPositive = change >= 0;
+        var changeLabel = Math.abs(change).toFixed(1) + "% vs 2024";
+        var changeClass = isPositive ? "kpi-change positive" : "kpi-change negative";
+        var arrowClass = isPositive ? "kpi-arrow up" : "kpi-arrow down";
+        var directionLabel = isPositive ? "Increase" : "Decrease";
 
         return [
           '<article class="kpi-card">',
           '<span class="kpi-value">' + escapeHtml(row.display_value) + '</span>',
           '<span class="kpi-label">' + escapeHtml(row.label) + '</span>',
-          '<span class="' + changeClass + '">' + escapeHtml(changeLabel) + '</span>',
+          '<span class="' + changeClass + '" aria-label="' + directionLabel + ' ' + escapeHtml(changeLabel) + '">',
+          '<span class="' + arrowClass + '" aria-hidden="true"></span>',
+          '<span>' + escapeHtml(changeLabel) + '</span>',
+          '</span>',
           "</article>"
         ].join("");
       }).join("");

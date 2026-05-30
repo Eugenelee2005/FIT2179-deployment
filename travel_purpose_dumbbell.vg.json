@@ -5,7 +5,7 @@
   "title": {
     "text": "Travel purpose change from 2024 to 2025",
     "subtitle": "Connected dots compare visitor trips for each purpose.",
-    "anchor": "start",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
@@ -19,8 +19,8 @@
     {
       "mark": {
         "type": "rule",
-        "stroke": "#9aa8b6",
-        "strokeWidth": 2
+        "stroke": "#b8c4ce",
+        "strokeWidth": 3
       },
       "encoding": {
         "y": {
@@ -102,7 +102,7 @@
       ],
       "mark": {
         "type": "circle",
-        "size": 150,
+        "size": 175,
         "stroke": "#ffffff",
         "strokeWidth": 1
       },
@@ -139,7 +139,7 @@
               "2025"
             ],
             "range": [
-              "#a6cee3",
+              "#e69f00",
               "#0072b2"
             ]
           }

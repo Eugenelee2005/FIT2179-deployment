@@ -5,7 +5,7 @@
   "title": {
     "text": "Icon waffle: visitor spending categories",
     "subtitle": "Each pictogram represents about 1% of selected major 2025 visitor spending.",
-    "anchor": "start",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,

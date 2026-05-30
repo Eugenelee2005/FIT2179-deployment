@@ -1,23 +1,71 @@
 {
-  "width": 980,
-  "height": 520,
+  "width": 1040,
+  "height": 560,
   "background": "#ffffff",
   "title": {
-    "text": "Top tourism regions by visitor nights",
-    "subtitle": "The longest lollipops show where international visitors spent the most nights.",
-    "anchor": "start",
+    "text": "Top 10 tourism regions by visitor nights",
+    "subtitle": "Use the selector to compare top tourism regions by visitor nights in 2024 and 2025.",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
     "offset": 10
   },
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2025,
+      "bind": {
+        "input": "select",
+        "options": [
+          2024,
+          2025
+        ],
+        "name": "Year: "
+      }
+    }
+  ],
   "data": {
     "url": "data/top_regions.csv"
   },
   "transform": [
     {
-      "filter": "datum.rank <= 15"
+      "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
+      "as": "selected_trips"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? datum.nights_2024 : datum.nights_2025",
+      "as": "selected_nights"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? datum.expenditure_2024_m : datum.expenditure_2025_m",
+      "as": "selected_expenditure_m"
+    },
+    {
+      "calculate": "datum.selected_nights / datum.selected_trips",
+      "as": "selected_avg_nights_per_trip"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? '2024' : '2025'",
+      "as": "selected_year_label"
+    },
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "selected_rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "selected_nights",
+          "order": "descending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.selected_rank <= 10"
     },
     {
       "calculate": "0",
@@ -28,8 +76,8 @@
     {
       "mark": {
         "type": "rule",
-        "stroke": "#9ecae1",
-        "strokeWidth": 3
+        "stroke": "#b2abd2",
+        "strokeWidth": 4
       },
       "encoding": {
         "y": {
@@ -37,8 +85,8 @@
           "type": "nominal",
           "title": null,
           "sort": {
-            "field": "nights_2025",
-            "order": "descending"
+            "field": "selected_rank",
+            "order": "ascending"
           }
         },
         "x": {
@@ -47,15 +95,15 @@
           "title": "2025 visitor nights ('000)"
         },
         "x2": {
-          "field": "nights_2025"
+          "field": "selected_nights"
         }
       }
     },
     {
       "mark": {
         "type": "circle",
-        "size": 100,
-        "color": "#0072b2",
+        "size": 150,
+        "color": "#6a51a3",
         "stroke": "#ffffff",
         "strokeWidth": 1
       },
@@ -65,32 +113,37 @@
           "type": "nominal",
           "title": null,
           "sort": {
-            "field": "nights_2025",
-            "order": "descending"
+            "field": "selected_rank",
+            "order": "ascending"
           },
           "axis": {
             "labelLimit": 260,
-            "labelFontSize": 13
+            "labelFontSize": 14
           }
         },
         "x": {
-          "field": "nights_2025",
+          "field": "selected_nights",
           "type": "quantitative",
-          "title": "2025 visitor nights ('000)",
+          "title": "Selected-year visitor nights ('000)",
           "scale": {
             "domain": [
               0,
-              100000
+              105000
             ]
           },
           "axis": {
             "format": ",.0f",
             "gridColor": "#e5edf3",
             "labelFontSize": 13,
-            "titleFontSize": 13
+            "titleFontSize": 14
           }
         },
         "tooltip": [
+          {
+            "field": "selected_year_label",
+            "type": "nominal",
+            "title": "Selected year"
+          },
           {
             "field": "region",
             "type": "nominal",
@@ -102,25 +155,25 @@
             "title": "State/Territory"
           },
           {
-            "field": "trips_2025",
+            "field": "selected_trips",
             "type": "quantitative",
-            "title": "2025 trips ('000)",
+            "title": "Selected-year trips ('000)",
             "format": ",.1f"
           },
           {
-            "field": "nights_2025",
+            "field": "selected_nights",
             "type": "quantitative",
-            "title": "2025 nights ('000)",
+            "title": "Selected-year nights ('000)",
             "format": ",.0f"
           },
           {
-            "field": "expenditure_2025_m",
+            "field": "selected_expenditure_m",
             "type": "quantitative",
-            "title": "2025 expenditure ($M)",
+            "title": "Selected-year expenditure ($M)",
             "format": "$,.0f"
           },
           {
-            "field": "avg_nights_per_trip",
+            "field": "selected_avg_nights_per_trip",
             "type": "quantitative",
             "title": "Average nights per trip",
             "format": ".1f"
@@ -131,10 +184,10 @@
     {
       "transform": [
         {
-          "filter": "datum.rank == 1"
+          "filter": "datum.selected_rank == 1"
         },
         {
-          "calculate": "'Sydney: top region'",
+          "calculate": "datum.region + ': top region'",
           "as": "annotation"
         }
       ],
@@ -154,17 +207,17 @@
           "type": "nominal",
           "title": null,
           "sort": {
-            "field": "nights_2025",
-            "order": "descending"
+            "field": "selected_rank",
+            "order": "ascending"
           }
         },
         "x": {
-          "field": "nights_2025",
+          "field": "selected_nights",
           "type": "quantitative",
           "scale": {
             "domain": [
               0,
-              100000
+              105000
             ]
           }
         },
@@ -183,8 +236,8 @@
       "labelFont": "Arial",
       "titleFont": "Arial",
       "labelLimit": 260,
-      "labelFontSize": 13,
-      "titleFontSize": 13
+      "labelFontSize": 14,
+      "titleFontSize": 14
     }
   }
 }

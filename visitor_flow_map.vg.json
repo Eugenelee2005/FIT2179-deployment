@@ -5,7 +5,7 @@
   "title": {
     "text": "Where Australia's international visitors come from",
     "subtitle": "Line thickness is based on 2025 visitor trips from each source country.",
-    "anchor": "start",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
@@ -232,6 +232,45 @@
             "format": ",.0f"
           }
         ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/origin_flows.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.rank == 1"
+        },
+        {
+          "calculate": "'Largest source flow'",
+          "as": "annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 7,
+        "dy": -18,
+        "font": "Arial",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#d55e00"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "annotation",
+          "type": "nominal"
+        }
       }
     },
     {

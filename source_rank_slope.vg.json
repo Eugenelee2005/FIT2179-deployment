@@ -11,7 +11,7 @@
   "title": {
     "text": "Source country rank change",
     "subtitle": "Lines connect each source country's rank in 2024 and 2025.",
-    "anchor": "start",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
@@ -218,6 +218,49 @@
         },
         "text": {
           "field": "country",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.country == 'United Kingdom' && datum.year == 2025"
+        },
+        {
+          "calculate": "'UK moved ahead of USA'",
+          "as": "annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 86,
+        "dy": -10,
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#0072b2"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {
+            "reverse": true,
+            "domain": [
+              0.5,
+              12.5
+            ]
+          }
+        },
+        "text": {
+          "field": "annotation",
           "type": "nominal"
         }
       }

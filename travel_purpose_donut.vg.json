@@ -1,11 +1,11 @@
 {
-  "width": 480,
-  "height": 440,
+  "width": 620,
+  "height": 500,
   "background": "#ffffff",
   "title": {
     "text": "Visitor trips by travel purpose",
     "subtitle": "Use the year selector to compare the purpose mix.",
-    "anchor": "start",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
@@ -48,6 +48,11 @@
       "field": "selected_trips",
       "type": "quantitative",
       "stack": true
+    },
+    "order": {
+      "field": "selected_trips",
+      "type": "quantitative",
+      "sort": "descending"
     },
     "color": {
       "field": "purpose",
@@ -102,8 +107,8 @@
     {
       "mark": {
         "type": "arc",
-        "innerRadius": 92,
-        "outerRadius": 175,
+        "innerRadius": 82,
+        "outerRadius": 150,
         "stroke": "#ffffff",
         "strokeWidth": 2
       }
@@ -120,16 +125,19 @@
       ],
       "mark": {
         "type": "text",
-        "radius": 210,
+        "radius": 192,
         "font": "Arial",
         "fontSize": 13,
         "fontWeight": "bold",
-        "color": "#17212b"
+        "color": "#102033"
       },
       "encoding": {
         "text": {
           "field": "slice_label",
           "type": "nominal"
+        },
+        "color": {
+          "value": "#102033"
         }
       }
     }

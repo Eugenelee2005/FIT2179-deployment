@@ -5,7 +5,7 @@
   "title": {
     "text": "Capital city and regional share",
     "subtitle": "Each bar is normalised to show the within-state split.",
-    "anchor": "start",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
@@ -35,27 +35,16 @@
       "filter": "datum.measure == selectedMeasure"
     }
   ],
-  "mark": {
-    "type": "bar",
-    "height": {
-      "band": 0.74
-    }
-  },
   "encoding": {
     "y": {
       "field": "state",
       "type": "nominal",
       "title": null,
-      "sort": [
-        "New South Wales",
-        "Victoria",
-        "Queensland",
-        "South Australia",
-        "Western Australia",
-        "Tasmania",
-        "Northern Territory",
-        "Australian Capital Territory"
-      ]
+      "sort": {
+        "field": "value_2025",
+        "op": "sum",
+        "order": "descending"
+      }
     },
     "x": {
       "field": "value_2025",
@@ -80,7 +69,7 @@
           "Regional area"
         ],
         "range": [
-          "#0072b2",
+          "#6a51a3",
           "#e69f00"
         ]
       }
@@ -120,6 +109,53 @@
       }
     ]
   },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "height": {
+          "band": 0.74
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.state == 'Australian Capital Territory' && datum.area_type == 'Capital city / gateway'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#ffffff"
+      },
+      "encoding": {
+        "x": {
+          "datum": 0.5,
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": {
+            "field": "value_2025",
+            "op": "sum",
+            "order": "descending"
+          }
+        },
+        "text": {
+          "value": "ACT: fully capital/gateway"
+        },
+        "color": {
+          "value": "#ffffff"
+        }
+      }
+    }
+  ],
   "config": {
     "view": {
       "stroke": null

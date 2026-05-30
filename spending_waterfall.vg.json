@@ -5,7 +5,7 @@
   "title": {
     "text": "Drivers of visitor spending change",
     "subtitle": "Bars show how travel purposes contributed to the 2024-2025 spending increase.",
-    "anchor": "start",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
@@ -75,8 +75,8 @@
               "total"
             ],
             "range": [
-              "#0072b2",
-              "#d95f02",
+              "#009e73",
+              "#d55e00",
               "#737373"
             ]
           }
@@ -137,6 +137,42 @@
         },
         "text": {
           "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.component == 'Education'"
+        },
+        {
+          "calculate": "'Largest driver: Education'",
+          "as": "annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -30,
+        "font": "Arial",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#0072b2"
+      },
+      "encoding": {
+        "x": {
+          "field": "component",
+          "type": "nominal",
+          "sort": {
+            "field": "sort_order"
+          }
+        },
+        "y": {
+          "field": "high",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "annotation",
           "type": "nominal"
         }
       }

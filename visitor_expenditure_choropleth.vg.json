@@ -6,7 +6,7 @@
   "title": {
     "text": "Visitor activity by state and territory",
     "subtitle": "Use the controls to switch between value and percentage-change views.",
-    "anchor": "start",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
@@ -396,7 +396,7 @@
         {
           "title": {
             "text": "Selected State/Territory",
-            "anchor": "start",
+            "anchor": "middle",
             "font": "Arial",
             "fontSize": 14
           },
@@ -494,7 +494,7 @@
         {
           "title": {
             "text": "Selected Value",
-            "anchor": "start",
+            "anchor": "middle",
             "font": "Arial",
             "fontSize": 14
           },

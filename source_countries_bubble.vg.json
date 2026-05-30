@@ -3,23 +3,54 @@
   "height": 500,
   "background": "#ffffff",
   "title": {
-    "text": "Source countries: visitor trips versus spending",
-    "subtitle": "Bubble size shows visitor nights; colour shows visitor-trip growth from 2024 to 2025.",
-    "anchor": "start",
+    "text": "Source countries: selected-year visitor trips versus spending",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "subtitleFontSize": 12,
     "subtitleColor": "#5c6876",
     "offset": 10
   },
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2025,
+      "bind": {
+        "input": "select",
+        "options": [
+          2024,
+          2025
+        ],
+        "name": "Year: "
+      }
+    }
+  ],
   "data": {
     "url": "data/source_countries.csv"
   },
+  "transform": [
+    {
+      "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
+      "as": "selected_trips"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? datum.spend_2024_m : datum.spend_2025_m",
+      "as": "selected_spend_m"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? datum.nights_2024 : datum.nights_2025",
+      "as": "selected_nights"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? '2024' : '2025'",
+      "as": "selected_year_label"
+    }
+  ],
   "encoding": {
     "x": {
-      "field": "trips_2025",
+      "field": "selected_trips",
       "type": "quantitative",
-      "title": "2025 visitor trips ('000)",
+      "title": "Selected-year visitor trips ('000)",
       "axis": {
         "format": ",.0f",
         "gridColor": "#e5edf3",
@@ -28,9 +59,9 @@
       }
     },
     "y": {
-      "field": "spend_2025_m",
+      "field": "selected_spend_m",
       "type": "quantitative",
-      "title": "2025 spend in Australia ($M)",
+      "title": "Selected-year spend in Australia ($M)",
       "axis": {
         "format": "$,.0f",
         "gridColor": "#e5edf3",
@@ -49,9 +80,9 @@
       },
       "encoding": {
         "size": {
-          "field": "nights_2025",
+          "field": "selected_nights",
           "type": "quantitative",
-          "title": "2025 visitor nights ('000)",
+          "title": "Selected-year visitor nights ('000)",
           "scale": {
             "range": [
               80,
@@ -63,26 +94,60 @@
           }
         },
         "color": {
-          "field": "trips_change_pct",
-          "type": "quantitative",
-          "title": "Trips change (%)",
+          "field": "region",
+          "type": "nominal",
+          "title": "Source region",
           "scale": {
-            "domainMid": 0,
+            "domain": [
+              "Asia",
+              "Europe",
+              "North America",
+              "Oceania"
+            ],
             "range": [
-              "#d95f02",
-              "#f7f7f7",
-              "#0072b2"
+              "#0072b2",
+              "#cc79a7",
+              "#e69f00",
+              "#999999"
             ]
           },
           "legend": {
-            "title": "Trip change 2024-2025"
+            "title": "Source region"
           }
         },
+        "order": {
+          "field": "selected_nights",
+          "type": "quantitative",
+          "sort": "descending"
+        },
         "tooltip": [
+          {
+            "field": "selected_year_label",
+            "type": "nominal",
+            "title": "Selected year"
+          },
           {
             "field": "country",
             "type": "nominal",
             "title": "Country"
+          },
+          {
+            "field": "selected_trips",
+            "type": "quantitative",
+            "title": "Selected-year trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "selected_spend_m",
+            "type": "quantitative",
+            "title": "Selected-year spend ($M)",
+            "format": "$,.0f"
+          },
+          {
+            "field": "selected_nights",
+            "type": "quantitative",
+            "title": "Selected-year nights ('000)",
+            "format": ",.0f"
           },
           {
             "field": "trips_2024",
@@ -109,10 +174,9 @@
             "format": ",.0f"
           },
           {
-            "field": "trips_change_pct",
-            "type": "quantitative",
-            "title": "Trips change",
-            "format": "+.1f"
+            "field": "region",
+            "type": "nominal",
+            "title": "Source region"
           }
         ]
       }
