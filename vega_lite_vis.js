@@ -9,7 +9,7 @@ function embedMap(container, spec, options) {
 
   vegaEmbed(container, spec, embedOptions).then(function(result) {
     if (container === "#choropleth_map") {
-      setupChoroplethLegendTitle();
+      setupChoroplethLegend();
     }
 
     // Access the Vega view instance as result.view.
@@ -19,8 +19,9 @@ function embedMap(container, spec, options) {
   });
 }
 
-function setupChoroplethLegendTitle() {
+function setupChoroplethLegend() {
   var controls = document.querySelector("#choropleth_controls");
+  var legend = document.querySelector("#choropleth_legend");
   if (!controls) {
     return;
   }
@@ -37,22 +38,34 @@ function setupChoroplethLegendTitle() {
     });
   }
 
-  function getLegendTitle() {
+  function getLegendConfig() {
     var view = getCheckedValue(["Change 2024-2025", "2024 value", "2025 value"]);
     var metric = getCheckedValue(["Expenditure ($M)", "Visitor trips ('000)"]);
 
     if (view === "Change 2024-2025") {
-      return metric === "Expenditure ($M)" ? "Change in expenditure (%)" : "Change in trips (%)";
+      return {
+        title: metric === "Expenditure ($M)" ? "Change in expenditure (%)" : "Change in visitor trips (%)",
+        gradient: "linear-gradient(90deg, #f97316 0%, #9ca3af 50%, #1d4ed8 100%)",
+        labels: ["Decrease", "No change", "Increase"]
+      };
     }
 
     if (metric === "Expenditure ($M)") {
-      return view === "2024 value" ? "Expenditure 2024 ($M)" : "Expenditure 2025 ($M)";
+      return {
+        title: view === "2024 value" ? "2024 expenditure ($M)" : "2025 expenditure ($M)",
+        gradient: "linear-gradient(90deg, #bfdbfe 0%, #60a5fa 35%, #2563eb 70%, #1e3a8a 100%)",
+        labels: ["Lower", "", "Higher"]
+      };
     }
 
-    return view === "2024 value" ? "Trips 2024 ('000)" : "Trips 2025 ('000)";
+    return {
+      title: view === "2024 value" ? "2024 visitor trips ('000)" : "2025 visitor trips ('000)",
+      gradient: "linear-gradient(90deg, #ddd6fe 0%, #a78bfa 35%, #7c3aed 70%, #4c1d95 100%)",
+      labels: ["Lower", "", "Higher"]
+    };
   }
 
-  function updateLegendTitle() {
+  function updateSvgLegendTitle(title) {
     var legendTitles = [
       "Selected map value",
       "Change in expenditure (%)",
@@ -62,7 +75,6 @@ function setupChoroplethLegendTitle() {
       "Trips 2024 ('000)",
       "Trips 2025 ('000)"
     ];
-    var title = getLegendTitle();
     var textNodes = document.querySelectorAll("#choropleth_map svg text");
 
     Array.prototype.forEach.call(textNodes, function(textNode) {
@@ -72,10 +84,27 @@ function setupChoroplethLegendTitle() {
     });
   }
 
-  updateLegendTitle();
+  function updateLegend() {
+    var config = getLegendConfig();
+
+    if (legend) {
+      legend.innerHTML = ''
+        + '<div class="legend-title">' + config.title + '</div>'
+        + '<div class="legend-gradient" style="background: ' + config.gradient + '"></div>'
+        + '<div class="legend-labels">'
+        + '<span>' + config.labels[0] + '</span>'
+        + '<span>' + config.labels[1] + '</span>'
+        + '<span>' + config.labels[2] + '</span>'
+        + '</div>';
+    }
+
+    updateSvgLegendTitle(config.title);
+  }
+
+  updateLegend();
   controls.addEventListener("change", function() {
-    setTimeout(updateLegendTitle, 0);
-    setTimeout(updateLegendTitle, 100);
+    setTimeout(updateLegend, 0);
+    setTimeout(updateLegend, 100);
   });
 }
 

@@ -22,6 +22,32 @@
         .vega-bind {
             margin-right: 24px;
         }
+
+        #choropleth_legend {
+            margin: 8px 0 12px;
+            max-width: 360px;
+        }
+
+        .legend-title {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .legend-gradient {
+            width: 260px;
+            height: 14px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .legend-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 260px;
+            color: #334155;
+            font-size: 11px;
+            margin-top: 4px;
+        }
     </style>
 
     <title>International Visitor Survey Maps</title>
@@ -33,6 +59,7 @@
 
     <h2>Visitor Expenditure by State and Territory</h2>
     <div id="choropleth_controls"></div>
+    <div id="choropleth_legend"></div>
     <div id="choropleth_map"></div>
 
     <h2>International Visitor Flows into Australia</h2>

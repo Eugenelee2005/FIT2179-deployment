@@ -138,6 +138,18 @@
             {
               "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
               "as": "selected_value"
+            },
+            {
+              "calculate": "(datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100",
+              "as": "trips_change_pct"
+            },
+            {
+              "calculate": "selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : datum.trips_change_pct",
+              "as": "display_change_pct"
+            },
+            {
+              "calculate": "selectedView == 'Change 2024-2025' ? (datum.selected_value < 0 ? '#f97316' : (datum.selected_value < 10 ? '#9ca3af' : (datum.selected_value < 20 ? '#60a5fa' : '#1d4ed8'))) : (selectedMetric == 'Expenditure ($M)' ? (datum.selected_value < 1500 ? '#bfdbfe' : (datum.selected_value < 4000 ? '#60a5fa' : (datum.selected_value < 8000 ? '#2563eb' : '#1e3a8a'))) : (datum.selected_value < 500 ? '#ddd6fe' : (datum.selected_value < 1500 ? '#a78bfa' : (datum.selected_value < 3000 ? '#7c3aed' : '#4c1d95'))))",
+              "as": "map_color"
             }
           ],
           "params": [
@@ -158,17 +170,10 @@
           },
           "encoding": {
             "color": {
-              "field": "selected_value",
-              "type": "quantitative",
-              "title": "Change in expenditure (%)",
-              "scale": {
-                "range": ["#475569", "#1d4ed8", "#0f766e"]
-              },
-              "legend": {
-                "title": "Change in expenditure (%)",
-                "orient": "right",
-                "format": ",.0f"
-              }
+              "field": "map_color",
+              "type": "nominal",
+              "scale": null,
+              "legend": null
             },
             "stroke": {
               "condition": {
@@ -304,7 +309,19 @@
               "as": "selected_value"
             },
             {
-              "calculate": "selectedView == 'Change 2024-2025' ? format(datum.selected_value, '+.1f') + '%' : format(datum.selected_value, ',.0f')",
+              "calculate": "(datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100",
+              "as": "trips_change_pct"
+            },
+            {
+              "calculate": "selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : datum.trips_change_pct",
+              "as": "display_change_pct"
+            },
+            {
+              "calculate": "datum.state == 'New South Wales' ? 'NSW' : (datum.state == 'Victoria' ? 'VIC' : (datum.state == 'Queensland' ? 'QLD' : (datum.state == 'South Australia' ? 'SA' : (datum.state == 'Western Australia' ? 'WA' : (datum.state == 'Tasmania' ? 'TAS' : (datum.state == 'Northern Territory' ? 'NT' : 'ACT'))))))",
+              "as": "state_abbrev"
+            },
+            {
+              "calculate": "datum.state_abbrev + ' ' + format(datum.display_change_pct, '+.0f') + '%'",
               "as": "label_text"
             }
           ],
@@ -391,6 +408,10 @@
             {
               "calculate": "selectedView == 'Change 2024-2025' ? (selectedMetric == 'Expenditure ($M)' ? datum.exp_change_pct : (datum.trips_2025 - datum.trips_2024) / datum.trips_2024 * 100) : (selectedView == '2024 value' ? (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2024_m : datum.trips_2024) : (selectedMetric == 'Expenditure ($M)' ? datum.expenditure_2025_m : datum.trips_2025))",
               "as": "selected_value"
+            },
+            {
+              "calculate": "selectedView == 'Change 2024-2025' ? (datum.selected_value < 0 ? '#f97316' : (datum.selected_value < 10 ? '#9ca3af' : (datum.selected_value < 20 ? '#60a5fa' : '#1d4ed8'))) : (selectedMetric == 'Expenditure ($M)' ? (datum.selected_value < 1500 ? '#bfdbfe' : (datum.selected_value < 4000 ? '#60a5fa' : (datum.selected_value < 8000 ? '#2563eb' : '#1e3a8a'))) : (datum.selected_value < 500 ? '#ddd6fe' : (datum.selected_value < 1500 ? '#a78bfa' : (datum.selected_value < 3000 ? '#7c3aed' : '#4c1d95'))))",
+              "as": "map_color"
             }
           ],
           "mark": {
@@ -400,11 +421,9 @@
           },
           "encoding": {
             "color": {
-              "field": "selected_value",
-              "type": "quantitative",
-              "scale": {
-                "range": ["#475569", "#1d4ed8", "#0f766e"]
-              },
+              "field": "map_color",
+              "type": "nominal",
+              "scale": null,
               "legend": null
             },
             "tooltip": [
