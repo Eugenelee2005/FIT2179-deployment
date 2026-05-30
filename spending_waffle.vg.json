@@ -1,6 +1,6 @@
 {
-  "width": 420,
-  "height": 420,
+  "width": 560,
+  "height": 390,
   "background": "#ffffff",
   "title": {
     "text": "Icon waffle: visitor spending categories",
@@ -184,12 +184,14 @@
     },
     "legend": {
       "orient": "bottom",
-      "columns": 1,
+      "columns": 4,
       "labelFont": "Segoe UI Emoji",
       "titleFont": "Arial",
-      "labelFontSize": 12,
+      "labelFontSize": 11,
       "titleFontSize": 13,
-      "labelLimit": 340
+      "labelLimit": 160,
+      "columnPadding": 8,
+      "rowPadding": 2
     }
   }
 }

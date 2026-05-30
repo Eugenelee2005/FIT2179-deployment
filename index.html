@@ -287,7 +287,7 @@
         }
 
         .chart-feature .chart-host {
-            flex: 1 1 620px;
+            flex: 1 1 50%;
             min-width: 0;
         }
 
@@ -296,7 +296,7 @@
             border: 1px solid var(--line);
             border-radius: 8px;
             color: var(--ink);
-            flex: 0 1 330px;
+            flex: 1 1 50%;
             padding: 18px;
         }
 
@@ -662,9 +662,6 @@
             <div class="chart-grid">
                 <article class="chart-card wide">
                     <h3>How every $100 of visitor spending is distributed</h3>
-                    <p class="figure-subtitle">Each pictogram represents about 1% of major international visitor spending categories in 2025.</p>
-                    <p class="callout"><strong>Readability note:</strong> Icons identify the spending category</p>
-                    <p class="caption">The source workbook provides this spending-category breakdown for 2025 only, so the waffle chart is kept as a 2025 composition.</p>
                     <div class="chart-feature">
                         <div id="spending_waffle" class="chart-host"></div>
                         <aside class="chart-side-panel" aria-label="Spending composition highlights">
@@ -684,6 +681,9 @@
                             <p class="side-note">The waffle excludes minor other expenditure so the icon grid remains readable.</p>
                         </aside>
                     </div>
+                    <p class="figure-subtitle">Each pictogram represents about 1% of major international visitor spending categories in 2025.</p>
+                    <p class="callout"><strong>Readability note:</strong> Icons identify the spending category.</p>
+                    <p class="caption">The source workbook provides this spending-category breakdown for 2025 only, so the waffle chart is kept as a 2025 composition.</p>
                     <p class="caption">Icon key: plane for airfares, house for food/drink/accommodation, pencil for education, shopping bag for shopping, folded map for tours, train for transportation, and music note for entertainment.</p>
                 </article>
 

@@ -1,5 +1,5 @@
 {
-  "width": 820,
+  "width": 1100,
   "height": 500,
   "background": "#ffffff",
   "title": {
@@ -20,7 +20,7 @@
     ],
     "scale": 190,
     "translate": [
-      410,
+      550,
       255
     ]
   },

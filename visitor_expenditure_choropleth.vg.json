@@ -42,7 +42,7 @@
   ],
   "vconcat": [
     {
-      "width": 820,
+      "width": 980,
       "height": 500,
       "projection": {
         "type": "mercator"
@@ -400,7 +400,7 @@
             "font": "Arial",
             "fontSize": 14
           },
-          "width": 280,
+          "width": 340,
           "height": 220,
           "projection": {
             "type": "mercator"
@@ -498,7 +498,7 @@
             "font": "Arial",
             "fontSize": 14
           },
-          "width": 480,
+          "width": 580,
           "height": 120,
           "data": {
             "url": "data/australia_states.topojson",
