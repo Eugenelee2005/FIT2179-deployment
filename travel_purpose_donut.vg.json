@@ -1,0 +1,111 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 360,
+  "height": 360,
+  "background": "#ffffff",
+  "title": {
+    "text": "Why do international visitors come to Australia?",
+    "subtitle": "Select 2024 or 2025 to compare visitor-trip shares by main travel purpose.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2025,
+      "bind": {
+        "input": "select",
+        "options": [2024, 2025],
+        "name": "Year: "
+      }
+    }
+  ],
+  "data": {
+    "url": "data/travel_purpose.csv"
+  },
+  "transform": [
+    {
+      "calculate": "selectedYear == 2024 ? datum.trips_2024 : datum.trips_2025",
+      "as": "selected_trips"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? datum.share_2024_pct : datum.share_2025_pct",
+      "as": "selected_share_pct"
+    },
+    {
+      "calculate": "selectedYear == 2024 ? datum.spend_2024_m : datum.spend_2025_m",
+      "as": "selected_spend_m"
+    }
+  ],
+  "mark": {
+    "type": "arc",
+    "innerRadius": 82,
+    "outerRadius": 165,
+    "stroke": "#ffffff",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "theta": {
+      "field": "selected_trips",
+      "type": "quantitative",
+      "stack": true
+    },
+    "color": {
+      "field": "purpose",
+      "type": "nominal",
+      "title": "Travel purpose",
+      "scale": {
+        "domain": [
+          "Holiday",
+          "Visiting friends and relatives",
+          "Business",
+          "Education",
+          "Employment",
+          "Other"
+        ],
+        "range": ["#0072b2", "#56b4e9", "#e69f00", "#cc79a7", "#6a51a3", "#999999"]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "purpose",
+        "type": "nominal",
+        "title": "Purpose"
+      },
+      {
+        "field": "selected_trips",
+        "type": "quantitative",
+        "title": "Trips ('000)",
+        "format": ",.1f"
+      },
+      {
+        "field": "selected_share_pct",
+        "type": "quantitative",
+        "title": "Share of trips",
+        "format": ".1f"
+      },
+      {
+        "field": "selected_spend_m",
+        "type": "quantitative",
+        "title": "Spend in Australia ($M)",
+        "format": "$,.0f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "orient": "bottom",
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "columns": 2
+    }
+  }
+}
+

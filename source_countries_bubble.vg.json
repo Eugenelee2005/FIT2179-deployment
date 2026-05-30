@@ -1,0 +1,118 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 820,
+  "height": 440,
+  "background": "#ffffff",
+  "title": {
+    "text": "Which source markets bring both visitors and spending?",
+    "subtitle": "Each bubble represents a source country. Larger bubbles indicate more visitor nights.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "data": {
+    "url": "data/source_countries.csv"
+  },
+  "mark": {
+    "type": "circle",
+    "opacity": 0.78,
+    "stroke": "#ffffff",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "trips_2025",
+      "type": "quantitative",
+      "title": "2025 visitor trips ('000)",
+      "axis": {
+        "format": ",.0f",
+        "gridColor": "#e5edf3"
+      }
+    },
+    "y": {
+      "field": "spend_2025_m",
+      "type": "quantitative",
+      "title": "2025 spend in Australia ($M)",
+      "axis": {
+        "format": "$,.0f",
+        "gridColor": "#e5edf3"
+      }
+    },
+    "size": {
+      "field": "nights_2025",
+      "type": "quantitative",
+      "title": "2025 visitor nights ('000)",
+      "scale": {
+        "range": [70, 2200]
+      },
+      "legend": {
+        "title": "Nights ('000)"
+      }
+    },
+    "color": {
+      "field": "trips_change_pct",
+      "type": "quantitative",
+      "title": "Trips change (%)",
+      "scale": {
+        "domainMid": 0,
+        "range": ["#d95f02", "#f7f7f7", "#0072b2"]
+      },
+      "legend": {
+        "title": "Trip change 2024-2025"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "country",
+        "type": "nominal",
+        "title": "Country"
+      },
+      {
+        "field": "trips_2024",
+        "type": "quantitative",
+        "title": "2024 trips ('000)",
+        "format": ",.1f"
+      },
+      {
+        "field": "trips_2025",
+        "type": "quantitative",
+        "title": "2025 trips ('000)",
+        "format": ",.1f"
+      },
+      {
+        "field": "spend_2025_m",
+        "type": "quantitative",
+        "title": "2025 spend ($M)",
+        "format": "$,.0f"
+      },
+      {
+        "field": "nights_2025",
+        "type": "quantitative",
+        "title": "2025 nights ('000)",
+        "format": ",.0f"
+      },
+      {
+        "field": "trips_change_pct",
+        "type": "quantitative",
+        "title": "Trips change",
+        "format": "+.1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

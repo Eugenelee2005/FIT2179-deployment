@@ -1,0 +1,110 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 760,
+  "height": 360,
+  "background": "#ffffff",
+  "title": {
+    "text": "Different visitors spend in different ways",
+    "subtitle": "The heatmap shows which visitor purposes contribute most to each spending category.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "data": {
+    "url": "data/spending_by_purpose.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.expenditure_2025_m != null && isValid(datum.expenditure_2025_m)"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "purpose",
+      "type": "nominal",
+      "title": "Travel purpose",
+      "sort": [
+        "Holiday",
+        "Visiting friends and relatives",
+        "Business",
+        "Education",
+        "Other / employment"
+      ],
+      "axis": {
+        "labelAngle": -20,
+        "labelLimit": 130
+      }
+    },
+    "y": {
+      "field": "spending_category",
+      "type": "nominal",
+      "title": "Spending category",
+      "sort": [
+        "Food, drink & accommodation",
+        "Airfares",
+        "Education",
+        "Shopping",
+        "Tours",
+        "Transportation",
+        "Entertainment",
+        "Other Expenditure"
+      ]
+    },
+    "color": {
+      "field": "expenditure_2025_m",
+      "type": "quantitative",
+      "title": "Expenditure ($M)",
+      "scale": {
+        "range": ["#deebf7", "#9ecae1", "#3182bd", "#08519c"]
+      },
+      "legend": {
+        "format": "$,.0f"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "purpose",
+        "type": "nominal",
+        "title": "Travel purpose"
+      },
+      {
+        "field": "spending_category",
+        "type": "nominal",
+        "title": "Spending category"
+      },
+      {
+        "field": "expenditure_2025_m",
+        "type": "quantitative",
+        "title": "Expenditure ($M)",
+        "format": "$,.0f"
+      },
+      {
+        "field": "share_within_purpose_pct",
+        "type": "quantitative",
+        "title": "Share of purpose spend",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

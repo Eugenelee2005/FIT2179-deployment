@@ -1,0 +1,9 @@
+spending_category,expenditure_2025_m,share_all_pct,share_major_pct,include_in_waffle
+Airfares,13749.176,24.7,25.74,yes
+Tours,4005.099,7.19,7.5,yes
+Transportation,2716.652,4.88,5.09,yes
+"Food, drink & accommodation",19000.199,34.13,35.57,yes
+Shopping,4424.088,7.95,8.28,yes
+Entertainment,1004.532,1.8,1.88,yes
+Education,8510.936,15.29,15.93,yes
+Other Expenditure,2262.594,4.06,,no

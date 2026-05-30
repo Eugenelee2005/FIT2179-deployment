@@ -1,0 +1,128 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 760,
+  "height": 460,
+  "background": "#ffffff",
+  "title": {
+    "text": "Where international visitors stay the longest",
+    "subtitle": "Top tourism regions ranked by visitor nights in 2025.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "data": {
+    "url": "data/top_regions.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.rank <= 15"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#9ecae1",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "y": {
+          "field": "region",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "nights_2025",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "datum": 0,
+          "type": "quantitative",
+          "title": "2025 visitor nights ('000)"
+        },
+        "x2": {
+          "field": "nights_2025"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 100,
+        "color": "#0072b2",
+        "stroke": "#ffffff",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "region",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "nights_2025",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "nights_2025",
+          "type": "quantitative",
+          "title": "2025 visitor nights ('000)",
+          "axis": {
+            "format": ",.0f",
+            "gridColor": "#e5edf3"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "region",
+            "type": "nominal",
+            "title": "Tourism region"
+          },
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State/Territory"
+          },
+          {
+            "field": "trips_2025",
+            "type": "quantitative",
+            "title": "2025 trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "nights_2025",
+            "type": "quantitative",
+            "title": "2025 nights ('000)",
+            "format": ",.0f"
+          },
+          {
+            "field": "expenditure_2025_m",
+            "type": "quantitative",
+            "title": "2025 expenditure ($M)",
+            "format": "$,.0f"
+          },
+          {
+            "field": "avg_nights_per_trip",
+            "type": "quantitative",
+            "title": "Average nights per trip",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelLimit": 180
+    }
+  }
+}
+

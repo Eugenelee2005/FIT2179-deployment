@@ -1,0 +1,211 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 460,
+  "height": 430,
+  "background": "#ffffff",
+  "title": {
+    "text": "Which source markets moved up or down?",
+    "subtitle": "Lines show whether each source country rose, fell, or stayed stable in visitor-trip ranking.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "data": {
+    "url": "data/source_country_ranks.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2,
+        "opacity": 0.78
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "axis": {
+            "labelAngle": 0,
+            "labelFontWeight": "bold"
+          }
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "title": "Rank by visitor trips",
+          "scale": {
+            "reverse": true,
+            "domain": [0.5, 12.5]
+          },
+          "axis": {
+            "tickMinStep": 1
+          }
+        },
+        "detail": {
+          "field": "country",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "rank_change",
+          "type": "quantitative",
+          "title": "Rank change",
+          "scale": {
+            "domainMid": 0,
+            "range": ["#d95f02", "#c7c7c7", "#0072b2"]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 70,
+        "stroke": "#ffffff",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {
+            "reverse": true,
+            "domain": [0.5, 12.5]
+          }
+        },
+        "color": {
+          "field": "rank_change",
+          "type": "quantitative",
+          "legend": null,
+          "scale": {
+            "domainMid": 0,
+            "range": ["#d95f02", "#c7c7c7", "#0072b2"]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "trips_2024",
+            "type": "quantitative",
+            "title": "2024 trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "trips_2025",
+            "type": "quantitative",
+            "title": "2025 trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "rank_2024",
+            "type": "quantitative",
+            "title": "2024 rank"
+          },
+          {
+            "field": "rank_2025",
+            "type": "quantitative",
+            "title": "2025 rank"
+          },
+          {
+            "field": "rank_change",
+            "type": "quantitative",
+            "title": "Rank movement"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2024"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -8,
+        "font": "Arial",
+        "fontSize": 11,
+        "color": "#17212b"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {
+            "reverse": true,
+            "domain": [0.5, 12.5]
+          }
+        },
+        "text": {
+          "field": "country",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2025"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "font": "Arial",
+        "fontSize": 11,
+        "color": "#17212b"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {
+            "reverse": true,
+            "domain": [0.5, 12.5]
+          }
+        },
+        "text": {
+          "field": "country",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

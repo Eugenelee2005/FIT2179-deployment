@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 360,
+  "height": 360,
+  "background": "#ffffff",
+  "title": {
+    "text": "How every $100 of visitor spending is distributed",
+    "subtitle": "Each square represents about 1% of major international visitor spending categories in 2025.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "data": {
+    "url": "data/waffle_spending.csv"
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.2
+  },
+  "encoding": {
+    "x": {
+      "field": "column",
+      "type": "ordinal",
+      "axis": null
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null
+    },
+    "color": {
+      "field": "spending_category",
+      "type": "nominal",
+      "title": "Spending category",
+      "scale": {
+        "domain": [
+          "Airfares",
+          "Food, drink & accommodation",
+          "Education",
+          "Shopping",
+          "Tours",
+          "Transportation",
+          "Entertainment"
+        ],
+        "range": ["#0072b2", "#56b4e9", "#6a51a3", "#e69f00", "#cc79a7", "#999999", "#8dd3c7"]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "spending_category",
+        "type": "nominal",
+        "title": "Category"
+      },
+      {
+        "field": "expenditure_2025_m",
+        "type": "quantitative",
+        "title": "2025 expenditure ($M)",
+        "format": "$,.0f"
+      },
+      {
+        "field": "share_of_major_spending_pct",
+        "type": "quantitative",
+        "title": "Share of selected spending",
+        "format": ".1f"
+      },
+      {
+        "field": "squares",
+        "type": "quantitative",
+        "title": "Squares"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null,
+      "step": 26
+    },
+    "legend": {
+      "orient": "bottom",
+      "columns": 1,
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelLimit": 300
+    }
+  }
+}
+

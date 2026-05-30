@@ -1,0 +1,46 @@
+state,area,area_type,measure,value_2025,value_2024,unit,share_pct
+New South Wales,Sydney,Capital city / gateway,Trips,3819.858,3529.4,'000 trips,84.01
+New South Wales,Regional NSW,Regional area,Trips,727.239,709.871,'000 trips,15.99
+Victoria,Melbourne,Capital city / gateway,Trips,2652.593,2551.991,'000 trips,86.26
+Victoria,Regional VIC,Regional area,Trips,422.496,451.986,'000 trips,13.74
+Queensland,Brisbane and the Gold Coast,Capital city / gateway,Trips,1784.565,1661.506,'000 trips,64
+Queensland,Regional QLD,Regional area,Trips,1003.634,933.931,'000 trips,36
+South Australia,Adelaide,Capital city / gateway,Trips,404.111,401.796,'000 trips,76.65
+South Australia,Regional SA,Regional area,Trips,123.091,132.419,'000 trips,23.35
+Western Australia,Perth,Capital city / gateway,Trips,1006.839,812.857,'000 trips,79.71
+Western Australia,Regional WA,Regional area,Trips,256.296,226.265,'000 trips,20.29
+Tasmania,Hobart,Capital city / gateway,Trips,235.361,211.186,'000 trips,63.03
+Tasmania,Regional TAS,Regional area,Trips,138.063,127.791,'000 trips,36.97
+Northern Territory,Darwin,Capital city / gateway,Trips,143.447,125.759,'000 trips,48.85
+Northern Territory,Regional NT,Regional area,Trips,150.196,133.648,'000 trips,51.15
+Australian Capital Territory,Canberra,Capital city / gateway,Trips,198.544,214.663,'000 trips,100
+New South Wales,Sydney,Capital city / gateway,Nights,88192.226,83589.264,'000 nights,83.25
+New South Wales,Regional NSW,Regional area,Nights,17741.645,17239.548,'000 nights,16.75
+Victoria,Melbourne,Capital city / gateway,Nights,67877.162,70544.973,'000 nights,86.11
+Victoria,Regional VIC,Regional area,Nights,10945.094,9720.553,'000 nights,13.89
+Queensland,Brisbane and the Gold Coast,Capital city / gateway,Nights,37586.195,36094.779,'000 nights,67.59
+Queensland,Regional QLD,Regional area,Nights,18024.862,17159.368,'000 nights,32.41
+South Australia,Adelaide,Capital city / gateway,Nights,12402.824,10974.131,'000 nights,84.25
+South Australia,Regional SA,Regional area,Nights,2317.797,2617.782,'000 nights,15.75
+Western Australia,Perth,Capital city / gateway,Nights,35638.108,25748.183,'000 nights,84.89
+Western Australia,Regional WA,Regional area,Nights,6343.659,5555.711,'000 nights,15.11
+Tasmania,Hobart,Capital city / gateway,Nights,2542.902,2466.337,'000 nights,50.4
+Tasmania,Regional TAS,Regional area,Nights,2502.684,2493.084,'000 nights,49.6
+Northern Territory,Darwin,Capital city / gateway,Nights,3059.88,3461.457,'000 nights,69.23
+Northern Territory,Regional NT,Regional area,Nights,1360.16,1146.095,'000 nights,30.77
+Australian Capital Territory,Canberra,Capital city / gateway,Nights,5613.726,5431.069,'000 nights,100
+New South Wales,Sydney,Capital city / gateway,Expenditure,13733.866,10903.603,$M,91.32
+New South Wales,Regional NSW,Regional area,Expenditure,1305.645,1121.883,$M,8.68
+Victoria,Melbourne,Capital city / gateway,Expenditure,8836.642,8401.086,$M,91.32
+Victoria,Regional VIC,Regional area,Expenditure,839.613,645.003,$M,8.68
+Queensland,Brisbane and the Gold Coast,Capital city / gateway,Expenditure,5043.176,4277.089,$M,67.38
+Queensland,Regional QLD,Regional area,Expenditure,2441.389,1942.593,$M,32.62
+South Australia,Adelaide,Capital city / gateway,Expenditure,1550.533,1134.146,$M,88.05
+South Australia,Regional SA,Regional area,Expenditure,210.398,213.717,$M,11.95
+Western Australia,Perth,Capital city / gateway,Expenditure,2981.155,2268.353,$M,87.55
+Western Australia,Regional WA,Regional area,Expenditure,423.774,357.006,$M,12.45
+Tasmania,Hobart,Capital city / gateway,Expenditure,507.789,356.849,$M,71.36
+Tasmania,Regional TAS,Regional area,Expenditure,203.772,194.42,$M,28.64
+Northern Territory,Darwin,Capital city / gateway,Expenditure,243.796,235.099,$M,46.29
+Northern Territory,Regional NT,Regional area,Expenditure,282.822,233.136,$M,53.71
+Australian Capital Territory,Canberra,Capital city / gateway,Expenditure,586.799,626.528,$M,100

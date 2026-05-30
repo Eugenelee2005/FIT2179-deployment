@@ -1,0 +1,5 @@
+sort_order,metric,label,display_value,value_2025,unit,change_pct
+1,visitor_trips,International visitor trips,8.27M,8272.331,'000 trips,8.4
+2,visitor_nights,Visitor nights,312.7M,312676.586,'000 nights,6
+3,spend_in_australia,Spend in Australia,$39.2B,39191.346,$M,19.1
+4,average_spend_per_trip,Average spend per trip,"$4,738",4737.64,$ per trip,9.9

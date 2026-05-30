@@ -4,8 +4,8 @@
   "height": 500,
   "background": "#ffffff",
   "title": {
-    "text": "International visitor flows into Australia",
-    "subtitle": "Top named origin markets by trips, year ending December 2025",
+    "text": "Where Australia\u2019s international visitors come from",
+    "subtitle": "Top 12 source countries by visitor trips, year ending December 2025",
     "anchor": "start",
     "font": "Arial",
     "fontSize": 20,
@@ -79,7 +79,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Asia", "Europe", "North America", "Oceania"],
-            "range": ["#0f6f8f", "#7c3aed", "#c2410c", "#0f8a5f"]
+            "range": ["#0072b2", "#cc79a7", "#e69f00", "#999999"]
           },
           "legend": {
             "title": "Origin region"
@@ -107,6 +107,12 @@
             "type": "quantitative",
             "title": "Trips 2025 ('000)",
             "format": ",.1f"
+          },
+          {
+            "field": "nights_2025",
+            "type": "quantitative",
+            "title": "Nights 2025 ('000)",
+            "format": ",.0f"
           },
           {
             "field": "spend_2025",
@@ -156,7 +162,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Asia", "Europe", "North America", "Oceania"],
-            "range": ["#0f6f8f", "#7c3aed", "#c2410c", "#0f8a5f"]
+            "range": ["#0072b2", "#cc79a7", "#e69f00", "#999999"]
           },
           "legend": null
         },

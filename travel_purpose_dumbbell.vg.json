@@ -1,0 +1,169 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 760,
+  "height": 340,
+  "background": "#ffffff",
+  "title": {
+    "text": "How travel purposes changed from 2024 to 2025",
+    "subtitle": "The distance between the two dots shows whether each travel purpose gained or lost visitor trips.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "data": {
+    "url": "data/travel_purpose.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#9aa8b6",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "purpose",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "trips_2025",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "trips_2024",
+          "type": "quantitative",
+          "title": "Visitor trips ('000)",
+          "axis": {
+            "format": ",.0f",
+            "gridColor": "#e5edf3"
+          }
+        },
+        "x2": {
+          "field": "trips_2025"
+        },
+        "tooltip": [
+          {
+            "field": "purpose",
+            "type": "nominal",
+            "title": "Purpose"
+          },
+          {
+            "field": "trips_2024",
+            "type": "quantitative",
+            "title": "2024 trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "trips_2025",
+            "type": "quantitative",
+            "title": "2025 trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "trips_change_abs",
+            "type": "quantitative",
+            "title": "Absolute change ('000)",
+            "format": "+,.1f"
+          },
+          {
+            "field": "trips_change_pct",
+            "type": "quantitative",
+            "title": "Percentage change",
+            "format": "+.1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": ["trips_2024", "trips_2025"],
+          "as": ["year_field", "trips"]
+        },
+        {
+          "calculate": "datum.year_field == 'trips_2024' ? '2024' : '2025'",
+          "as": "year"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 120,
+        "stroke": "#ffffff",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "purpose",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "trips_2025",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "trips",
+          "type": "quantitative",
+          "title": "Visitor trips ('000)"
+        },
+        "color": {
+          "field": "year",
+          "type": "nominal",
+          "title": "Year",
+          "scale": {
+            "domain": ["2024", "2025"],
+            "range": ["#a6cee3", "#0072b2"]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "purpose",
+            "type": "nominal",
+            "title": "Purpose"
+          },
+          {
+            "field": "trips_2024",
+            "type": "quantitative",
+            "title": "2024 trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "trips_2025",
+            "type": "quantitative",
+            "title": "2025 trips ('000)",
+            "format": ",.1f"
+          },
+          {
+            "field": "trips_change_abs",
+            "type": "quantitative",
+            "title": "Absolute change ('000)",
+            "format": "+,.1f"
+          },
+          {
+            "field": "trips_change_pct",
+            "type": "quantitative",
+            "title": "Percentage change",
+            "format": "+.1f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

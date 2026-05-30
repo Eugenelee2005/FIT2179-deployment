@@ -1,0 +1,127 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 760,
+  "height": 360,
+  "background": "#ffffff",
+  "title": {
+    "text": "Do visitors stay in capital cities or regional Australia?",
+    "subtitle": "Each bar shows the capital city/gateway and regional share of visitor activity within each state or territory.",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5c6876",
+    "offset": 12
+  },
+  "params": [
+    {
+      "name": "selectedMeasure",
+      "value": "Nights",
+      "bind": {
+        "input": "select",
+        "options": ["Trips", "Nights", "Expenditure"],
+        "name": "Measure: "
+      }
+    }
+  ],
+  "data": {
+    "url": "data/capital_regional.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.measure == selectedMeasure"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "height": {
+      "band": 0.74
+    }
+  },
+  "encoding": {
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "New South Wales",
+        "Victoria",
+        "Queensland",
+        "South Australia",
+        "Western Australia",
+        "Tasmania",
+        "Northern Territory",
+        "Australian Capital Territory"
+      ]
+    },
+    "x": {
+      "field": "value_2025",
+      "type": "quantitative",
+      "aggregate": "sum",
+      "stack": "normalize",
+      "title": "Share of selected 2025 measure",
+      "axis": {
+        "format": ".0%",
+        "gridColor": "#e5edf3"
+      }
+    },
+    "color": {
+      "field": "area_type",
+      "type": "nominal",
+      "title": "Area type",
+      "scale": {
+        "domain": ["Capital city / gateway", "Regional area"],
+        "range": ["#0072b2", "#e69f00"]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State/Territory"
+      },
+      {
+        "field": "area",
+        "type": "nominal",
+        "title": "Area"
+      },
+      {
+        "field": "area_type",
+        "type": "nominal",
+        "title": "Area type"
+      },
+      {
+        "field": "measure",
+        "type": "nominal",
+        "title": "Measure"
+      },
+      {
+        "field": "value_2025",
+        "type": "quantitative",
+        "title": "2025 value",
+        "format": ",.1f"
+      },
+      {
+        "field": "share_pct",
+        "type": "quantitative",
+        "title": "Share within state",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelLimit": 190
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}
+

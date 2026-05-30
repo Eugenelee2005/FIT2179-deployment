@@ -27,8 +27,8 @@
   "vconcat": [
     {
       "title": {
-        "text": "International visitor activity by Australian state and territory",
-        "subtitle": "Colour changes with the selected view and measure",
+        "text": "Where did international visitor activity grow?",
+        "subtitle": "Default view shows 2024-2025 percentage change. Select a year to compare expenditure or visitor trips.",
         "anchor": "start",
         "font": "Arial",
         "fontSize": 20,
