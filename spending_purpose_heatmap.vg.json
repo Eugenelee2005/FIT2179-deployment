@@ -1,15 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 760,
-  "height": 360,
+  "width": 980,
+  "height": 480,
   "background": "#ffffff",
   "title": {
     "text": "Different visitors spend in different ways",
     "subtitle": "The heatmap shows which visitor purposes contribute most to each spending category.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
+    "fontSize": 22,
+    "subtitleFontSize": 13,
     "subtitleColor": "#5c6876",
     "offset": 12
   },
@@ -40,7 +40,9 @@
       ],
       "axis": {
         "labelAngle": -20,
-        "labelLimit": 130
+        "labelLimit": 300,
+        "labelFontSize": 12,
+        "titleFontSize": 13
       }
     },
     "y": {
@@ -56,7 +58,12 @@
         "Transportation",
         "Entertainment",
         "Other Expenditure"
-      ]
+      ],
+      "axis": {
+        "labelLimit": 260,
+        "labelFontSize": 12,
+        "titleFontSize": 13
+      }
     },
     "color": {
       "field": "expenditure_2025_m",
@@ -100,11 +107,15 @@
     },
     "axis": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "labelFontSize": 12,
+      "titleFontSize": 13
     },
     "legend": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "labelFontSize": 12,
+      "titleFontSize": 13
     }
   }
 }

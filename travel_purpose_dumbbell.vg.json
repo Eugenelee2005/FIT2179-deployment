@@ -1,15 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 760,
-  "height": 340,
+  "width": 980,
+  "height": 420,
   "background": "#ffffff",
   "title": {
     "text": "How travel purposes changed from 2024 to 2025",
     "subtitle": "The distance between the two dots shows whether each travel purpose gained or lost visitor trips.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
+    "fontSize": 22,
+    "subtitleFontSize": 13,
     "subtitleColor": "#5c6876",
     "offset": 12
   },
@@ -31,6 +31,10 @@
           "sort": {
             "field": "trips_2025",
             "order": "descending"
+          },
+          "axis": {
+            "labelLimit": 260,
+            "labelFontSize": 13
           }
         },
         "x": {
@@ -39,7 +43,9 @@
           "title": "Visitor trips ('000)",
           "axis": {
             "format": ",.0f",
-            "gridColor": "#e5edf3"
+            "gridColor": "#e5edf3",
+            "labelFontSize": 13,
+            "titleFontSize": 13
           }
         },
         "x2": {
@@ -91,7 +97,7 @@
       ],
       "mark": {
         "type": "circle",
-        "size": 120,
+        "size": 150,
         "stroke": "#ffffff",
         "strokeWidth": 1
       },
@@ -103,12 +109,20 @@
           "sort": {
             "field": "trips_2025",
             "order": "descending"
+          },
+          "axis": {
+            "labelLimit": 260,
+            "labelFontSize": 13
           }
         },
         "x": {
           "field": "trips",
           "type": "quantitative",
-          "title": "Visitor trips ('000)"
+          "title": "Visitor trips ('000)",
+          "axis": {
+            "labelFontSize": 13,
+            "titleFontSize": 13
+          }
         },
         "color": {
           "field": "year",
@@ -159,11 +173,15 @@
     },
     "axis": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "labelFontSize": 13,
+      "titleFontSize": 13
     },
     "legend": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "labelFontSize": 12,
+      "titleFontSize": 13
     }
   }
 }

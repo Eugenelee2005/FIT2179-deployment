@@ -1,15 +1,21 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 460,
-  "height": 430,
+  "width": 760,
+  "height": 520,
+  "padding": {
+    "left": 190,
+    "right": 190,
+    "top": 18,
+    "bottom": 16
+  },
   "background": "#ffffff",
   "title": {
     "text": "Which source markets moved up or down?",
     "subtitle": "Lines show whether each source country rose, fell, or stayed stable in visitor-trip ranking.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
+    "fontSize": 22,
+    "subtitleFontSize": 13,
     "subtitleColor": "#5c6876",
     "offset": 12
   },
@@ -30,7 +36,8 @@
           "title": null,
           "axis": {
             "labelAngle": 0,
-            "labelFontWeight": "bold"
+            "labelFontWeight": "bold",
+            "labelFontSize": 13
           }
         },
         "y": {
@@ -42,7 +49,9 @@
             "domain": [0.5, 12.5]
           },
           "axis": {
-            "tickMinStep": 1
+            "tickMinStep": 1,
+            "labelFontSize": 13,
+            "titleFontSize": 13
           }
         },
         "detail": {
@@ -63,7 +72,7 @@
     {
       "mark": {
         "type": "circle",
-        "size": 70,
+        "size": 90,
         "stroke": "#ffffff",
         "strokeWidth": 1
       },
@@ -136,9 +145,9 @@
         "type": "text",
         "align": "right",
         "baseline": "middle",
-        "dx": -8,
+        "dx": -10,
         "font": "Arial",
-        "fontSize": 11,
+        "fontSize": 13,
         "color": "#17212b"
       },
       "encoding": {
@@ -170,9 +179,9 @@
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "dx": 8,
+        "dx": 10,
         "font": "Arial",
-        "fontSize": 11,
+        "fontSize": 13,
         "color": "#17212b"
       },
       "encoding": {
@@ -201,11 +210,15 @@
     },
     "axis": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "labelFontSize": 13,
+      "titleFontSize": 13
     },
     "legend": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "labelFontSize": 12,
+      "titleFontSize": 13
     }
   }
 }

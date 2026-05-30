@@ -1,15 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 360,
-  "height": 360,
+  "width": 480,
+  "height": 440,
   "background": "#ffffff",
   "title": {
     "text": "Why do international visitors come to Australia?",
     "subtitle": "Select 2024 or 2025 to compare visitor-trip shares by main travel purpose.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
+    "fontSize": 22,
+    "subtitleFontSize": 13,
     "subtitleColor": "#5c6876",
     "offset": 12
   },
@@ -41,13 +41,6 @@
       "as": "selected_spend_m"
     }
   ],
-  "mark": {
-    "type": "arc",
-    "innerRadius": 82,
-    "outerRadius": 165,
-    "stroke": "#ffffff",
-    "strokeWidth": 2
-  },
   "encoding": {
     "theta": {
       "field": "selected_trips",
@@ -96,6 +89,42 @@
       }
     ]
   },
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 92,
+        "outerRadius": 175,
+        "stroke": "#ffffff",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.selected_share_pct >= 8"
+        },
+        {
+          "calculate": "(datum.purpose == 'Visiting friends and relatives' ? 'VFR' : datum.purpose) + ' ' + format(datum.selected_share_pct, '.1f') + '%'",
+          "as": "slice_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "radius": 210,
+        "font": "Arial",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#17212b"
+      },
+      "encoding": {
+        "text": {
+          "field": "slice_label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
   "config": {
     "view": {
       "stroke": null
@@ -104,8 +133,9 @@
       "orient": "bottom",
       "labelFont": "Arial",
       "titleFont": "Arial",
+      "labelFontSize": 12,
+      "titleFontSize": 13,
       "columns": 2
     }
   }
 }
-

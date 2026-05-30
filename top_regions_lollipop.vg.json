@@ -1,15 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 760,
-  "height": 460,
+  "width": 980,
+  "height": 520,
   "background": "#ffffff",
   "title": {
     "text": "Where international visitors stay the longest",
     "subtitle": "Top tourism regions ranked by visitor nights in 2025.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
+    "fontSize": 22,
+    "subtitleFontSize": 13,
     "subtitleColor": "#5c6876",
     "offset": 12
   },
@@ -19,6 +19,10 @@
   "transform": [
     {
       "filter": "datum.rank <= 15"
+    },
+    {
+      "calculate": "0",
+      "as": "zero"
     }
   ],
   "layer": [
@@ -39,7 +43,7 @@
           }
         },
         "x": {
-          "datum": 0,
+          "field": "zero",
           "type": "quantitative",
           "title": "2025 visitor nights ('000)"
         },
@@ -64,6 +68,10 @@
           "sort": {
             "field": "nights_2025",
             "order": "descending"
+          },
+          "axis": {
+            "labelLimit": 260,
+            "labelFontSize": 13
           }
         },
         "x": {
@@ -72,7 +80,9 @@
           "title": "2025 visitor nights ('000)",
           "axis": {
             "format": ",.0f",
-            "gridColor": "#e5edf3"
+            "gridColor": "#e5edf3",
+            "labelFontSize": 13,
+            "titleFontSize": 13
           }
         },
         "tooltip": [
@@ -121,8 +131,9 @@
     "axis": {
       "labelFont": "Arial",
       "titleFont": "Arial",
-      "labelLimit": 180
+      "labelLimit": 260,
+      "labelFontSize": 13,
+      "titleFontSize": 13
     }
   }
 }
-

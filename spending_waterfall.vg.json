@@ -1,15 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 780,
-  "height": 420,
+  "width": 980,
+  "height": 470,
   "background": "#ffffff",
   "title": {
     "text": "What drove the change in visitor spending?",
     "subtitle": "The waterfall chart shows how each travel purpose contributed to the difference between 2024 and 2025 spending.",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
+    "fontSize": 22,
+    "subtitleFontSize": 13,
     "subtitleColor": "#5c6876",
     "offset": 12
   },
@@ -46,8 +46,9 @@
             "field": "sort_order"
           },
           "axis": {
-            "labelAngle": -25,
-            "labelLimit": 120
+            "labelAngle": -28,
+            "labelLimit": 300,
+            "labelFontSize": 12
           }
         },
         "y": {
@@ -56,7 +57,9 @@
           "title": "Cumulative spend in Australia ($M)",
           "axis": {
             "format": "$,.0f",
-            "gridColor": "#e5edf3"
+            "gridColor": "#e5edf3",
+            "labelFontSize": 12,
+            "titleFontSize": 13
           }
         },
         "y2": {
@@ -109,7 +112,7 @@
         "type": "text",
         "dy": -6,
         "font": "Arial",
-        "fontSize": 11,
+        "fontSize": 12,
         "fontWeight": "bold",
         "color": "#17212b"
       },
@@ -138,12 +141,15 @@
     },
     "axis": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "labelFontSize": 12,
+      "titleFontSize": 13
     },
     "legend": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "labelFontSize": 12,
+      "titleFontSize": 13
     }
   }
 }
-
