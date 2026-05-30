@@ -306,15 +306,17 @@
             {
               "calculate": "selectedView == 'Change 2024-2025' ? format(datum.selected_value, '+.1f') + '%' : format(datum.selected_value, ',.0f')",
               "as": "label_text"
+            },
+            {
+              "calculate": "selectedView == 'Change 2024-2025' ? datum.selected_value >= 18 : (selectedMetric == 'Expenditure ($M)' ? datum.selected_value >= 6500 : datum.selected_value >= 1800)",
+              "as": "use_light_label"
             }
           ],
           "mark": {
             "type": "text",
-            "fontSize": 12,
+            "fontSize": 11,
             "fontWeight": "normal",
             "font": "Arial",
-            "stroke": "white",
-            "strokeWidth": 0.8,
             "dx": 0,
             "dy": 0
           },
@@ -322,7 +324,13 @@
             "longitude": {"field": "lon", "type": "quantitative"},
             "latitude": {"field": "lat", "type": "quantitative"},
             "text": {"field": "label_text", "type": "nominal"},
-            "color": {"value": "#0f172a"},
+            "color": {
+              "condition": {
+                "test": "datum.use_light_label",
+                "value": "#ffffff"
+              },
+              "value": "#17212b"
+            },
             "opacity": {"value": 0.95}
           }
         }
