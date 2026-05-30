@@ -89,6 +89,7 @@ function setupChoroplethLegend() {
 
     if (legend) {
       legend.innerHTML = ''
+        + '<div class="legend-heading">Legend</div>'
         + '<div class="legend-title">' + config.title + '</div>'
         + '<div class="legend-gradient" style="background: ' + config.gradient + '"></div>'
         + '<div class="legend-labels">'

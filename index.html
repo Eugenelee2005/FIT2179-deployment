@@ -24,11 +24,23 @@
         }
 
         #choropleth_legend {
-            margin: 8px 0 12px;
-            max-width: 360px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            margin: 8px 0 16px;
+            max-width: 340px;
+            padding: 10px 12px;
+        }
+
+        .legend-heading {
+            color: #0f172a;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
         }
 
         .legend-title {
+            color: #1e293b;
             font-size: 12px;
             font-weight: bold;
             margin-bottom: 5px;
@@ -59,7 +71,16 @@
 
     <h2>Visitor Expenditure by State and Territory</h2>
     <div id="choropleth_controls"></div>
-    <div id="choropleth_legend"></div>
+    <div id="choropleth_legend">
+        <div class="legend-heading">Legend</div>
+        <div class="legend-title">Change in expenditure (%)</div>
+        <div class="legend-gradient" style="background: linear-gradient(90deg, #f97316 0%, #9ca3af 50%, #1d4ed8 100%)"></div>
+        <div class="legend-labels">
+            <span>Decrease</span>
+            <span>No change</span>
+            <span>Increase</span>
+        </div>
+    </div>
     <div id="choropleth_map"></div>
 
     <h2>International Visitor Flows into Australia</h2>
