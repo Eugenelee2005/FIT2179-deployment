@@ -22,6 +22,39 @@
         .vega-bind {
             margin-right: 24px;
         }
+
+        .state-key {
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            color: #334155;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 14px 0 22px;
+            max-width: 960px;
+            padding: 14px 16px;
+        }
+
+        .state-key-title {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .state-key-list {
+            display: grid;
+            gap: 7px 28px;
+            grid-template-columns: repeat(4, minmax(180px, 1fr));
+        }
+
+        .state-key-list span {
+            white-space: nowrap;
+        }
+
+        .state-key-list strong {
+            color: #0f172a;
+            display: inline-block;
+            min-width: 34px;
+        }
     </style>
 
     <title>International Visitor Survey Maps</title>
@@ -34,6 +67,19 @@
     <h2>Visitor Expenditure by State and Territory</h2>
     <div id="choropleth_controls"></div>
     <div id="choropleth_map"></div>
+    <div class="state-key">
+        <strong class="state-key-title">State label key</strong>
+        <div class="state-key-list">
+            <span><strong>NSW</strong> New South Wales</span>
+            <span><strong>VIC</strong> Victoria</span>
+            <span><strong>QLD</strong> Queensland</span>
+            <span><strong>SA</strong> South Australia</span>
+            <span><strong>WA</strong> Western Australia</span>
+            <span><strong>TAS</strong> Tasmania</span>
+            <span><strong>NT</strong> Northern Territory</span>
+            <span><strong>ACT</strong> Australian Capital Territory</span>
+        </div>
+    </div>
 
     <h2>International Visitor Flows into Australia</h2>
     <div id="flow_map"></div>

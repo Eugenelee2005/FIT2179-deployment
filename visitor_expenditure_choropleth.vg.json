@@ -259,14 +259,14 @@
         {
           "data": {
             "values": [
-              {"state": "New South Wales",       "lon": 146.5, "lat": -32.8},
-              {"state": "Victoria",              "lon": 144.5, "lat": -36.9},
-              {"state": "Queensland",            "lon": 143.5, "lat": -22.5},
-              {"state": "South Australia",       "lon": 135.5, "lat": -30.8},
-              {"state": "Western Australia",     "lon": 121.0, "lat": -25.5},
-              {"state": "Tasmania",              "lon": 147.0, "lat": -41.8},
-              {"state": "Northern Territory",    "lon": 134.0, "lat": -20.5},
-              {"state": "Australian Capital Territory", "lon": 149.2, "lat": -35.7}
+              {"state": "New South Wales", "abbr": "NSW", "lon": 146.5, "lat": -32.8},
+              {"state": "Victoria", "abbr": "VIC", "lon": 144.5, "lat": -36.9},
+              {"state": "Queensland", "abbr": "QLD", "lon": 143.5, "lat": -22.5},
+              {"state": "South Australia", "abbr": "SA", "lon": 135.5, "lat": -30.8},
+              {"state": "Western Australia", "abbr": "WA", "lon": 121.0, "lat": -25.5},
+              {"state": "Tasmania", "abbr": "TAS", "lon": 147.0, "lat": -41.8},
+              {"state": "Northern Territory", "abbr": "NT", "lon": 134.0, "lat": -20.5},
+              {"state": "Australian Capital Territory", "abbr": "ACT", "lon": 149.2, "lat": -35.7}
             ]
           },
           "transform": [
@@ -304,14 +304,14 @@
               "as": "selected_value"
             },
             {
-              "calculate": "selectedView == 'Change 2024-2025' ? format(datum.selected_value, '+.1f') + '%' : format(datum.selected_value, ',.0f')",
+              "calculate": "selectedView == 'Change 2024-2025' ? datum.abbr + ' ' + format(datum.selected_value, '+.1f') + '%' : datum.abbr + ' ' + format(datum.selected_value, ',.0f')",
               "as": "label_text"
             }
           ],
           "mark": {
             "type": "text",
             "fontSize": 11,
-            "fontWeight": "normal",
+            "fontWeight": "bold",
             "font": "Arial",
             "dx": 0,
             "dy": 0
@@ -481,48 +481,82 @@
             {
               "calculate": "selectedMetric == 'Expenditure ($M)' ? 'Expenditure ($M)' : \"Visitor trips ('000)\"",
               "as": "metric_label"
+            },
+            {
+              "calculate": "selectedView == 'Change 2024-2025' ? format(datum.selected_value, '+.1f') + '%' : (selectedMetric == 'Expenditure ($M)' ? '$' + format(datum.selected_value, ',.0f') + 'M' : format(datum.selected_value, ',.0f') + 'k')",
+              "as": "selected_label"
             }
           ],
-          "mark": {
-            "type": "bar",
-            "cornerRadiusEnd": 2
-          },
-          "encoding": {
-            "x": {
-              "field": "selected_value",
-              "type": "quantitative",
-              "title": null,
-              "axis": {
-                "format": ",.0f"
+          "layer": [
+            {
+              "mark": {
+                "type": "bar",
+                "cornerRadiusEnd": 2
+              },
+              "encoding": {
+                "x": {
+                  "field": "selected_value",
+                  "type": "quantitative",
+                  "title": null,
+                  "axis": {
+                    "format": ",.0f"
+                  }
+                },
+                "y": {
+                  "field": "state_name",
+                  "type": "nominal",
+                  "title": "Selected state"
+                },
+                "color": {
+                  "value": "#0f766e"
+                },
+                "tooltip": [
+                  {
+                    "field": "state_name",
+                    "type": "nominal",
+                    "title": "State/Territory"
+                  },
+                  {
+                    "field": "metric_label",
+                    "type": "nominal",
+                    "title": "Metric"
+                  },
+                  {
+                    "field": "selected_value",
+                    "type": "quantitative",
+                    "title": "Value",
+                    "format": ",.1f"
+                  }
+                ]
               }
             },
-            "y": {
-              "field": "state_name",
-              "type": "nominal",
-              "title": null
-            },
-            "color": {
-              "value": "#0f766e"
-            },
-            "tooltip": [
-              {
-                "field": "state_name",
-                "type": "nominal",
-                "title": "State/Territory"
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "middle",
+                "dx": 6,
+                "font": "Arial",
+                "fontSize": 12,
+                "fontWeight": "bold",
+                "color": "#0f172a"
               },
-              {
-                "field": "metric_label",
-                "type": "nominal",
-                "title": "Metric"
-              },
-              {
-                "field": "selected_value",
-                "type": "quantitative",
-                "title": "Value",
-                "format": ",.1f"
+              "encoding": {
+                "x": {
+                  "field": "selected_value",
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "state_name",
+                  "type": "nominal"
+                },
+                "text": {
+                  "field": "selected_label",
+                  "type": "nominal"
+                }
               }
-            ]
-          }
+            }
+          ]
         }
       ],
       "spacing": 40
