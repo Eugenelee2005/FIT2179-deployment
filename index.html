@@ -274,7 +274,7 @@
             display: flex;
             justify-content: center;
             min-height: 260px;
-            overflow-x: auto;
+            overflow: visible;
             padding: 4px 0;
             width: 100%;
         }
@@ -291,13 +291,17 @@
             min-width: 0;
         }
 
+        .chart-feature .vega-bindings {
+            margin-bottom: 0;
+        }
+
         .chart-side-panel {
             background: linear-gradient(180deg, #172235 0%, #101827 100%);
             border: 1px solid var(--line);
             border-radius: 8px;
             color: var(--ink);
             flex: 1 1 50%;
-            padding: 18px;
+            padding: 22px 20px 18px;
         }
 
         .chart-side-panel h4 {
@@ -332,9 +336,77 @@
             line-height: 1.45;
         }
 
+        .side-explain {
+            border-top: 1px solid var(--line);
+            margin-top: 12px;
+            padding-top: 12px;
+        }
+
+        .side-explain h5 {
+            color: var(--ink);
+            font-size: 13px;
+            font-weight: 700;
+            margin: 0 0 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .side-explain p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+            margin: 0;
+        }
+
+        .compare-list {
+            border-top: 1px solid var(--line);
+            padding: 10px 0 6px;
+        }
+
+        .compare-row {
+            align-items: center;
+            display: flex;
+            font-size: 13px;
+            gap: 6px;
+            padding: 4px 0;
+        }
+
+        .compare-label {
+            color: var(--ink);
+            font-weight: 700;
+            min-width: 68px;
+        }
+
+        .compare-values {
+            color: var(--muted);
+            flex: 1;
+        }
+
+        .compare-values b {
+            color: var(--ink);
+        }
+
+        .compare-change {
+            font-weight: 700;
+            min-width: 52px;
+            text-align: right;
+        }
+
+        .compare-change.positive {
+            color: var(--green);
+        }
+
+        .compare-change.negative {
+            color: #ff8a80;
+        }
+
         .vega-embed,
         .vega-embed svg {
             max-width: 100%;
+        }
+
+        .vega-embed {
+            overflow: visible !important;
         }
 
         .vega-embed svg {
@@ -349,6 +421,10 @@
             font-size: 14px;
             margin: 4px 0 16px;
             padding: 10px 12px 2px;
+        }
+
+        .vega-bindings:empty {
+            display: none;
         }
 
         .vega-bind {
@@ -422,6 +498,15 @@
             font-size: 13px;
             margin-top: 28px;
             padding-top: 16px;
+        }
+
+        .source-note a {
+            color: var(--blue-dark);
+            text-decoration: underline;
+        }
+
+        .source-note a:hover {
+            color: var(--blue);
         }
 
         .error {
@@ -504,7 +589,7 @@
             <h2>Introduction:</h2>
             <p class="hero-copy">Australia's international tourism is not only about how many visitors arrived. The 2025 International Visitor Survey reveals a more detailed picture of tourism recovery. This visualisation explores where visitors came from, why they travelled, which parts of Australia benefited, how long they stayed, and how their spending flowed through the economy.</p>
             <div class="metadata" aria-label="Project metadata">
-                <span><strong>Source:</strong> Tourism Research Australia, International Visitor Survey.</span>
+                <span><strong>Source:</strong> Tourism Research Australia (2026). International tourism results. Australian Government.</span>
                 <span><strong>Note:</strong> Official survey-based estimates for international visitors aged 15 years and over.</span>
                 <span><strong>Author:</strong> Eugene Lee.</span>
                 <span><strong>Date:</strong> 2026.</span>
@@ -572,23 +657,65 @@
                     <p class="alert-note"><strong>Select year:</strong> Use the dropdown below to switch between 2024 and 2025 data.</p>
                     <div class="chart-feature">
                         <div id="travel_purpose_donut" class="chart-host"></div>
-                        <aside class="chart-side-panel" aria-label="Travel purpose highlights">
-                            <h4>2025 purpose highlights</h4>
+                        <aside class="chart-side-panel" aria-label="Purpose mix comparison">
+                            <h4>Purpose mix comparison</h4>
                             <div class="side-stat">
-                                <strong>43.3%</strong>
-                                <span>of visitor trips were for holidays, the largest travel purpose.</span>
+                                <strong>2024</strong>
+                                <span>Holiday led at <b>42.4%</b>, VFR at <b>34.1%</b>, business at <b>10.2%</b>, education at <b>6.4%</b>.</span>
                             </div>
                             <div class="side-stat">
-                                <strong>33.6%</strong>
-                                <span>were visiting friends and relatives, showing the importance of family and social travel.</span>
+                                <strong>2025</strong>
+                                <span>Holiday edged up to <b>43.3%</b>, VFR at <b>33.6%</b>, business at <b>9.2%</b>, education at <b>6.5%</b>.</span>
                             </div>
-                            <div class="side-stat">
-                                <strong>Education</strong>
-                                <span>has a smaller trip share but is a major contributor to visitor spending.</span>
+                            <div class="compare-list" aria-label="Share change by purpose">
+                                <div class="compare-row">
+                                    <span class="compare-label">Holiday</span>
+                                    <span class="compare-values"><b>42.4</b>% → <b>43.3</b>%</span>
+                                    <span class="compare-change positive">+0.9 percent</span>
+                                </div>
+                                <div class="compare-row">
+                                    <span class="compare-label">VFR</span>
+                                    <span class="compare-values"><b>34.1</b>% → <b>33.6</b>%</span>
+                                    <span class="compare-change negative">-0.5 percent</span>
+                                </div>
+                                <div class="compare-row">
+                                    <span class="compare-label">Business</span>
+                                    <span class="compare-values"><b>10.2</b>% → <b>9.2</b>%</span>
+                                    <span class="compare-change negative">-1.0 percent</span>
+                                </div>
+                                <div class="compare-row">
+                                    <span class="compare-label">Education</span>
+                                    <span class="compare-values"><b>6.4</b>% → <b>6.5</b>%</span>
+                                    <span class="compare-change positive">+0.1 percent</span>
+                                </div>
+                            </div>
+                            <div class="side-explain">
+                                <h5>Why it matters</h5>
+                                <p>Recovery was driven by leisure and social travel, with no major shift in the purpose mix.</p>
+                            </div>
+                            <div class="side-explain">
+                                <h5>Spend lens</h5>
+                                <p>Trip share does not equal spending value. Education is only <b>6.5%</b> of trips, but about <b>37.0%</b> of spend in Australia.</p>
+                            </div>
+                            <div class="compare-list" aria-label="Spend lens by purpose">
+                                <div class="compare-row">
+                                    <span class="compare-label">Education</span>
+                                    <span class="compare-values"><b>$26.8k</b> per trip</span>
+                                    <span class="compare-change positive">37.0% spend</span>
+                                </div>
+                                <div class="compare-row">
+                                    <span class="compare-label">Holiday</span>
+                                    <span class="compare-values"><b>$3.6k</b> per trip</span>
+                                    <span class="compare-change positive">33.0% spend</span>
+                                </div>
+                                <div class="compare-row">
+                                    <span class="compare-label">VFR</span>
+                                    <span class="compare-values"><b>$2.0k</b> per trip</span>
+                                    <span class="compare-change">13.9% spend</span>
+                                </div>
                             </div>
                         </aside>
                     </div>
-                    <p class="caption">Small slices are left unlabelled so the donut remains readable.</p>
                 </article>
 
                 <article class="chart-card wide">
@@ -678,7 +805,14 @@
                                 <strong>15.9%</strong>
                                 <span>education.</span>
                             </div>
-                            <p class="side-note">The waffle excludes minor other expenditure so the icon grid remains readable.</p>
+                            <div class="side-explain">
+                                <h5>What this shows</h5>
+                                <p>Essential travel costs — accommodation, food and airfares — account for the largest share of visitor spending. Education also stands out due to international student-related expenditure.</p>
+                            </div>
+                            <div class="side-explain">
+                                <h5>Why this matters</h5>
+                                <p>The largest spending shares are linked to essential travel needs such as accommodation, food and airfares. This shows that international tourism supports core service industries, not only attractions and activities.</p>
+                            </div>
                         </aside>
                     </div>
                     <p class="figure-subtitle">Each pictogram represents about 1% of major international visitor spending categories in 2025.</p>
@@ -699,9 +833,9 @@
 
         <section class="section conclusion" aria-labelledby="conclusion-title">
             <h2 id="conclusion-title">Final Conclusion</h2>
-            <p>Overall, the visualisation shows that Australia's international tourism recovery is uneven. Some source markets bring high visitor numbers, while others generate longer stays or higher spending. The benefits are also uneven across states, cities, regions, and spending categories.</p>
-            <p>The main story is that 2025 was a stronger year for international tourism, but growth did not look the same everywhere. Understanding source markets, travel purposes and visitor geography helps explain where tourism value is concentrated and where future opportunities may sit.</p>
-            <p class="source-note"><strong>Source:</strong> Tourism Research Australia, International Visitor Survey. <strong>Note:</strong> The International Visitor Survey is official survey-based data. Values are estimates for international visitors aged 15 years and over.</p>
+            <p>Overall, the visualisation shows that Australia's international tourism recovery in 2025 was strong but uneven. Visitor trips, nights and spending increased, but the benefits were distributed differently across source markets, travel purposes, states, regions and spending categories.</p>
+            <p>The main insight is that tourism value depends on more than arrival numbers. Some markets bring high visitor volumes, while others generate longer stays or higher spending. By comparing visitor origins, travel purposes, destinations and spending behaviour, the visualisation highlights where tourism value is concentrated and where future opportunities may exist.</p>
+            <p class="source-note"><strong>Reference:</strong> Tourism Research Australia. (2026). <em>International tourism results</em>. Australian Government. <a href="https://www.tra.gov.au/en/tourism-statistics/international-tourism-results" target="_blank" rel="noopener noreferrer">https://www.tra.gov.au/en/tourism-statistics/international-tourism-results</a></p>
         </section>
     </main>
 

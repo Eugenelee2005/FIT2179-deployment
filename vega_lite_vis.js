@@ -48,6 +48,7 @@ function embedVisualization(container, spec, options) {
   }, options);
 
   vegaEmbed(container, spec, embedOptions).then(function() {
+    removeEmptyBindings(container);
     if (container === "#choropleth_map") {
       setupChoroplethLegendTitle();
     }
@@ -57,6 +58,20 @@ function embedVisualization(container, spec, options) {
       target.innerHTML = '<pre class="error">' + escapeHtml(String(error)) + '</pre>';
     }
     console.error(error);
+  });
+}
+
+function removeEmptyBindings(container) {
+  var target = document.querySelector(container);
+  if (!target) {
+    return;
+  }
+
+  var bindings = target.querySelectorAll(".vega-bindings");
+  Array.prototype.forEach.call(bindings, function(binding) {
+    if (binding.textContent.trim() === "" && binding.querySelectorAll("input, select, label").length === 0) {
+      binding.style.display = "none";
+    }
   });
 }
 
